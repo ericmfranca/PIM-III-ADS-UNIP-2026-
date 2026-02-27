@@ -1,72 +1,112 @@
-# PIM III – Plataforma Web Educacional
+# Nem Colei 🎓🐢
 
 Projeto desenvolvido para o **Projeto Integrado Multidisciplinar III (PIM III)** do curso de **Análise e Desenvolvimento de Sistemas** da **Universidade Paulista (UNIP)**.
 
 ---
 
-## 📌 Contexto
+## 📌 Sobre o Projeto
 
-O avanço das tecnologias digitais tem ampliado o uso de plataformas educacionais voltadas ao apoio do processo de ensino e aprendizagem. Nesse cenário, empresas de tecnologia educacional buscam soluções que permitam a aplicação de avaliações, o acompanhamento do desempenho dos usuários e a geração de informações para apoiar a tomada de decisão pedagógica.
+**Nem Colei** é uma **plataforma de estudos personalizados** voltada à preparação para **vestibulares e concursos públicos**.  
+O sistema auxilia estudantes a organizar seus estudos, identificar dificuldades e acompanhar sua evolução por meio de avaliações, indicadores de desempenho e recomendações direcionadas.
 
-Este projeto simula uma **empresa fictícia do setor de tecnologia educacional (EdTech)**, para a qual é proposta uma **plataforma web de avaliação e apoio à aprendizagem**.
+O foco da plataforma é promover um **aprendizado estruturado, honesto e contínuo**, baseado no progresso individual de cada usuário.
 
 ---
 
 ## 🎯 Objetivo
 
-Desenvolver o projeto de uma plataforma web educacional, integrando conceitos de:
+Desenvolver o projeto de uma plataforma web educacional que integre:
 
 - Engenharia de Software Ágil  
-- Modelagem de Banco de Dados (Relacional e NoSQL)  
 - Programação Orientada a Objetos (C#)  
+- Banco de Dados Relacional e NoSQL (conceitual)  
 - Desenvolvimento Web Responsivo  
 - UX/UI Design  
-- Análise de Dados e indicadores de desempenho  
+- Análise de Dados Educacionais  
 
-O projeto possui caráter acadêmico, mas busca simular um **cenário realista de mercado**, promovendo uma visão sistêmica do desenvolvimento de software.
+O projeto possui caráter acadêmico, mas simula um **cenário real de mercado**, alinhado às necessidades de estudantes que se preparam para exames de alta competitividade.
+
+---
+
+## 🧠 Conceito do Sistema
+
+A proposta do **Nem Colei** é apoiar o estudante por meio de:
+
+- Avaliações diagnósticas
+- Planos de estudo personalizados
+- Registro e acompanhamento de desempenho
+- Indicadores de evolução por disciplina e tema
+- Recomendações de estudo com base em dados
+
+O sistema prioriza o **aprendizado por mérito**, incentivando disciplina, constância e organização.
+
+---
+
+## 🎨 Identidade Visual
+
+A identidade visual do **Nem Colei** foi desenvolvida para transmitir:
+
+- **Aprendizado contínuo**
+- **Organização**
+- **Progresso gradual**
+- **Credibilidade acadêmica**
+
+O mascote do projeto é uma **tartaruga**, símbolo de constância e evolução no próprio ritmo.  
+Os elementos visuais reforçam o contexto educacional, como o capelo acadêmico, o bloco de tarefas e o símbolo de verificação, representando conclusão de atividades e progresso nos estudos.
+
+> A identidade visual reforça a proposta do sistema de que resultados consistentes são alcançados por meio de estudo estruturado e acompanhamento contínuo.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- C# (Programação Orientada a Objetos)
-- ASP.NET Core
-- Banco de Dados Relacional
-- Banco de Dados NoSQL (conceitual)
-- HTML, CSS e Bootstrap
-- Git e GitHub
+- C#  
+- ASP.NET Core Web API  
+- Banco de Dados Relacional  
+- NoSQL (conceitual)  
+- HTML, CSS e Bootstrap  
+- Git e GitHub  
 - GitHub Projects (Kanban)
 
 ---
 
 ## 📋 Organização do Projeto
 
-O desenvolvimento do projeto é organizado utilizando o **GitHub Projects no modelo Kanban**, com uso de **issues** para definição de tarefas e **pull requests** para revisão e integração das entregas.
+O desenvolvimento do projeto é organizado utilizando **GitHub Projects no modelo Kanban**, com uso de:
 
-Cada integrante do grupo lidera etapas específicas do PIM III, garantindo clareza de responsabilidades, organização do fluxo de trabalho e acompanhamento contínuo do progresso.
+- **Issues** para definição de tarefas  
+- **Sprints** para organização das entregas  
+- **Pull Requests** para revisão e integração  
+
+Cada integrante do grupo lidera etapas específicas do PIM III, garantindo clareza de responsabilidades e acompanhamento do progresso.
 
 ---
 
 ## 🔄 Fluxo de Trabalho
 
-O fluxo de trabalho adotado pelo grupo segue as seguintes etapas:
+O fluxo de trabalho adotado é:
 
 **Backlog → A Fazer → Em Andamento → Em Revisão → Concluído**
 
-- Cada tarefa é registrada como uma **issue**
-- O desenvolvimento ocorre em **branches**
-- A entrega é realizada por meio de **pull requests**
-- Toda entrega passa por **revisão** antes de ser integrada
+- Cada tarefa é registrada como uma *issue*
+- O desenvolvimento ocorre em *branches*
+- As entregas passam por revisão antes da integração
+
+---
+
+## 📊 Status do Projeto
+
+O status do projeto é acompanhado automaticamente por meio das *issues* do GitHub, refletindo o progresso das etapas do PIM III e das sprints definidas.
 
 ---
 
 ## 👥 Divisão de Responsabilidades
 
-- **Yasmin**: Etapa 1 (Negócio e Contexto) e Introdução  
+- **Yasmin**: Etapa 1 (Negócio, Contexto e Introdução)  
 - **Pedro**: Etapa 2 (Engenharia de Software Ágil)  
 - **Samuel**: Etapa 3 (Banco de Dados Relacional)  
 - **Kevin**: Etapa 3 (NoSQL) e Etapa 7 (Análise de Dados)  
-- **Mari**: Etapas 4, 5 e 6 (C#, Web e UX/UI)  
+- **Mari**: Etapa 4 (C#, Web API e POO)  
 - **Eric**: Etapas 8 e 9 (Comunicação, Integração e Revisão ABNT)
 
 ---
