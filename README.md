@@ -6,7 +6,7 @@ Projeto desenvolvido para o **Projeto Integrado Multidisciplinar III (PIM III)**
 
 ## 📌 Sobre o Projeto
 
-**Nem Colei** é uma **plataforma de estudos personalizados** voltada à preparação para **vestibulares e concursos públicos**.  
+**Nem Colei** é uma **plataforma de estudos personalizados** voltada à preparação para **vestibulares e concursos**.  
 O sistema auxilia estudantes a organizar seus estudos, identificar dificuldades e acompanhar sua evolução por meio de avaliações, indicadores de desempenho e recomendações direcionadas.
 
 O foco da plataforma é promover um **aprendizado estruturado, honesto e contínuo**, baseado no progresso individual de cada usuário.
