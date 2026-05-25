@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Aluno</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <main id="dash-aluno">
+  
+  <aside>
+    <header>
+      <img src="logo.png" alt="Logo Nem Colei" class="logo">
+      <span> Aluno</span>
+    </header>
+
+    <nav>
+      <h3>Principal</h3>
+      <button onclick="showPanel('aluno','painel')">Painel</button>
+      <button onclick="showPanel('aluno','avaliacoes')">Avaliações</button>
+      <button onclick="showPanel('aluno','questoes')">Questões</button>
+      <button onclick="showPanel('aluno','revisao')">Revisão</button>
+
+      <h3>Progresso</h3>
+      <button onclick="showPanel('aluno','desempenho')">Desempenho</button>
+      <button onclick="showPanel('aluno','conquistas')">Conquistas</button>
+      <button onclick="showPanel('aluno','certificados')">Certificados</button>
+      <button onclick="showPanel('aluno','ranking')">Ranking</button>
+
+      <h3>Pessoal</h3>
+      <button onclick="showPanel('aluno','plano')">Plano de Estudo</button>
+      <button onclick="showPanel('aluno','perfil')">Perfil</button>
+    </nav>
+
+    <footer>
+      <strong>Lucas Silva</strong>
+      <small>aluno@nemcolei.com</small>
+      <button onclick="logout()">Sair</button>
+    </footer>
+  </aside>
+
+  <section id="conteudo-dinamico">
+    
+    <header class="topbar">
+      <button onclick="toggleSidebar()">☰</button>
+      <h2>Painel</h2>
+      <button onclick="showPanel('aluno','recomendacoes')"> Recomendações</button>
+      <button onclick="showPanel('aluno','notificacoes')"> Notificações</button>
+    </header>
+
+    <fieldset id="aluno-painel">
+      <legend> Olá, Bem-Vindo de volta!</legend>
+      <p>Continue sua jornada de aprendizado</p>
+
+      <section class="card">
+        <h3>Estudioso — Nível 3</h3>
+        <p>1.340 XP (Próximo nível com 2.500 XP)</p>
+        <progress value="1340" max="2500"></progress>
+        <p><strong>7  Dias Seguidos</strong> de sequência!</p>
+      </section>
+
+      <section class="grid-resumo">
+        <article>
+          <h4>Questões Feitas</h4>
+          <p>342 (+24 esta semana)</p>
+        </article>
+        <article>
+          <h4>Taxa de Acerto</h4>
+          <p>68% (+3% vs. última semana)</p>
+        </article>
+        <article>
+          <h4>Conquistas</h4>
+          <p>3 de 8 disponíveis</p>
+        </article>
+        <article>
+          <h4>Certificados</h4>
+          <p>1 (Python)</p>
+        </article>
+      </section>
+
+      <section class="card foco">
+        <h3> Recomendação Diária</h3>
+        <mark> Python — Fundamentos</mark>
+        <p>Você errou 3 questões neste tópico na última semana. Hora de revisar!</p>
+        <small>~15 min · 10 questões · +50 XP</small>
+        <br><br>
+        <button onclick="startQuiz()">Começar Prática</button>
+      </section>
+
+      <section class="card">
+        <h3> Escolha sua Disciplina</h3>
+        <ul>
+          <li>Python (542 questões) - 48% concluído</li>
+          <li>SQL (380 questões) - 32% concluído</li>
+          <li>Machine Learning (290 questões) - 18% concluído</li>
+          <li>Engenharia de Software (210 questões) - 75% concluído</li>
+          <li>Libras (175 questões) - 60% concluído</li>
+          <li>C# (145 questões) - 22% concluído</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3> Últimas Avaliações</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Avaliação</th>
+              <th>Disciplina</th>
+              <th>Nota</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Simulado Python #4</td><td>Python</td><td>8.5</td><td>22/05</td></tr>
+            <tr><td>Prova de C# — POO</td><td>C#</td><td>9.2</td><td>20/05</td></tr>
+            <tr><td>Quiz SQL Básico</td><td>SQL</td><td>6.8</td><td>18/05</td></tr>
+            <tr><td>Simulado Machine Learning #2</td><td>Machine Learning</td><td>4.5</td><td>15/05</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </fieldset>
+
+    <fieldset id="aluno-questoes" style="display:none">
+      <legend>Simulado em Andamento</legend>
+      <header>
+        <span>Python — Fundamentos</span>
+        <p>Questão 1 de 5</p>
+        <time>15:00</time>
+      </header>
+
+      <div id="questionCard">
+        </div>
+
+      <footer>
+        <button id="btnPrev" onclick="quizPrev()" disabled>Anterior</button>
+        <button id="btnNext" onclick="quizNext()">Próxima</button>
+      </footer>
+    </fieldset>
+
+    <fieldset id="aluno-revisao" style="display:none">
+      <legend>Questões que você errou</legend>
+      <table>
+        <thead>
+          <tr>
+            <th>Questão</th>
+            <th>Disciplina</th>
+            <th>Sua Resposta</th>
+            <th>Correta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Qual é a raiz da equação x² - 5x + 6 = 0?</td>
+            <td>Engenharia de Software</td>
+            <td>x = 1 e x = 2</td>
+            <td><strong>x = 2 e x = 3</strong></td>
+          </tr>
+          <tr>
+            <td>Em SQL, qual cláusula filtra grupos?</td>
+            <td>SQL</td>
+            <td>WHERE</td>
+            <td><strong>HAVING</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </fieldset>
+
+    <fieldset id="aluno-certificados" style="display:none">
+      <legend>Seus Certificados</legend>
+      <article>
+        <h3>Certificado de Conclusão — C#</h3>
+        <p>Emitido em 15/05/2026 · Nota: 9.2 · Código: NC2026C8A1</p>
+        <button>Baixar PDF</button>
+      </article>
+    </fieldset>
+
+  </section>
+</main>
+
+
+
+</body>
+
+<h3> Painel do Aluno </h3>
+
+
+</html>

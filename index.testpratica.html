@@ -1,20 +1,50 @@
 <!DOCTYPE html> 
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nem Colei</title>
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="style.css">
+
+<script>
+function login() {
+  var username = document.getElementById("login").value;
+  var password = document.getElementById("senha").value;
+
+  if (username === "Administrador" && password === "123") {
+    alert("Login realizado com sucesso!");
+    location.href = "home.administrador.html"; // Manda lá pra página do administrador
+
+
+  } else if (username === "Aluno" && password === "1234") {
+    alert("Login realizado com sucesso!");
+    location.href = "home.aluno.html"; // Manda lá pra página do aluno
+
+  } else if (username === "Gerenciador de Conteudo" && password === "12345") {
+    alert("Login realizado com sucesso!");
+    location.href = "home.gerenciador.html"; // Manda lá pra página do gerenciador
+
+  } else {
+    alert("Nome de usuário ou senha incorretos.");
+  }
+}
+</script>
+
+
 </head>
+
 <body>
+
   <div class="login-card">
     <img src="logo.png" alt="Logo Nem Colei" class="logo">
-    <input type="text" placeholder="Digite seu nome">
+    <input type="text" id="login" placeholder="Digite seu nome">
     <br><br>
-    <input type="password" placeholder="Digite sua senha">
+    <input type="password" id="senha" placeholder="Digite sua senha">
     <br><br>
-    <button>Entrar</button>
+    <button onclick="login()">Entrar</button>
     <p>Faça parte do grupo</p> <a href="">Cadastra-se</a>
   </div>
 </body>
