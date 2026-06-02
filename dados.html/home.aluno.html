@@ -4,34 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Aluno</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/globals.css">
+    <link rel="stylesheet" href="../shared/style.aluno.css">
+    <script src="../shared/rascunho.js" defer></script>
 </head>
 <body>
-   
-    <main id="dash-aluno">
+  <a class="skip-link" href="#conteudo-dinamico">Pular para o conteúdo</a>
+    
+  <main id="dash-aluno" class="main-container">
   
-  <aside>
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
     <header>
       <img src="../logo.png" alt="Logo Nem Colei" class="logo">
       <span> Aluno</span>
     </header>
 
-    <nav>
+    <nav role="navigation" aria-label="Menu principal">
       <h3>Principal</h3>
-      <button onclick="showPanel('aluno','painel')">Painel</button>
-      <button onclick="showPanel('aluno','avaliacoes')">Avaliações</button>
-      <button onclick="showPanel('aluno','questoes')">Questões</button>
-      <button onclick="showPanel('aluno','revisao')">Revisão</button>
+      <button data-nav="painel" onclick="showPanel('aluno','painel')">Painel</button>
+      <button data-nav="avaliacoes" onclick="showPanel('aluno','avaliacoes')">Avaliações</button>
+      <button data-nav="questoes" onclick="showPanel('aluno','questoes')">Questões</button>
+      <button data-nav="revisao" onclick="showPanel('aluno','revisao')">Revisão</button>
 
       <h3>Progresso</h3>
-      <button onclick="showPanel('aluno','desempenho')">Desempenho</button>
-      <button onclick="showPanel('aluno','conquistas')">Conquistas</button>
-      <button onclick="showPanel('aluno','certificados')">Certificados</button>
-      <button onclick="showPanel('aluno','ranking')">Ranking</button>
+      <button data-nav="desempenho" onclick="showPanel('aluno','desempenho')">Desempenho</button>
+      <button data-nav="conquistas" onclick="showPanel('aluno','conquistas')">Conquistas</button>
+      <button data-nav="certificados" onclick="showPanel('aluno','certificados')">Certificados</button>
+      <button data-nav="ranking" onclick="showPanel('aluno','ranking')">Ranking</button>
 
       <h3>Pessoal</h3>
-      <button onclick="showPanel('aluno','plano')">Plano de Estudo</button>
-      <button onclick="showPanel('aluno','perfil')">Perfil</button>
+      <button data-nav="plano" onclick="showPanel('aluno','plano')">Plano de Estudo</button>
+      <button data-nav="perfil" onclick="showPanel('aluno','perfil')">Perfil</button>
     </nav>
 
     <footer>
@@ -41,24 +46,37 @@
     </footer>
   </aside>
 
-  <section id="conteudo-dinamico">
+  <section id="conteudo-dinamico" tabindex="-1">
     
-    <header class="topbar">
-      <button onclick="toggleSidebar()">☰</button>
+    <header class="topbar app-header">
+      <button class="menu-toggle" onclick="toggleSidebar()" aria-controls="sidebar" aria-expanded="false">☰</button>
       <h2>Painel</h2>
       <button onclick="showPanel('aluno','recomendacoes')"> Recomendações</button>
       <button onclick="showPanel('aluno','notificacoes')"> Notificações</button>
     </header>
 
-    <fieldset id="aluno-painel">
+    <fieldset id="aluno-painel" class="app-page active-page">
       <legend> Olá, Bem-Vindo de volta!</legend>
       <p>Continue sua jornada de aprendizado</p>
 
-      <section class="card">
-        <h3>Estudioso — Nível 3</h3>
-        <p>1.340 XP (Próximo nível com 2.500 XP)</p>
-        <progress value="1340" max="2500"></progress>
-        <p><strong>7  Dias Seguidos</strong> de sequência!</p>
+      <section class="card card-section">
+        <div id="xpCard">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <div id="levelTitle" class="level-badge">⭐ Carregando...</div>
+            <div id="levelNumber" style="font-weight:700;">Nível 0</div>
+          </div>
+
+          <div class="xp-bar-container" style="background:var(--color-surface-light); height:0.6rem; border-radius:999px; overflow:hidden;">
+            <div id="xpBar" class="progress-bar-fill" style="width:0%; height:100%; background:var(--color-accent);"></div>
+          </div>
+
+          <div class="xp-values">
+            <span id="currentXpDisplay">0 XP</span>
+            <span id="targetXpDisplay">0 XP</span>
+          </div>
+
+          <p style="margin-top:0.75rem;"><strong id="streakLabel">7 Dias Seguidos</strong></p>
+        </div>
       </section>
 
       <section class="grid-resumo">
@@ -80,16 +98,16 @@
         </article>
       </section>
 
-      <section class="card foco">
+      <section class="card foco card-section">
         <h3> Recomendação Diária</h3>
         <mark> Python — Fundamentos</mark>
         <p>Você errou 3 questões neste tópico na última semana. Hora de revisar!</p>
         <small>~15 min · 10 questões · +50 XP</small>
         <br><br>
-        <button onclick="startQuiz()">Começar Prática</button>
+        <button id="btnPraticar" class="btn-action" onclick="startQuiz()">Começar Prática</button>
       </section>
 
-      <section class="card">
+      <section class="card card-section">
         <h3> Escolha sua Disciplina</h3>
         <ul>
           <li>Python (542 questões) - 48% concluído</li>
@@ -101,24 +119,36 @@
         </ul>
       </section>
 
-      <section class="card">
+      <section class="card card-section">
         <h3> Últimas Avaliações</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Avaliação</th>
-              <th>Disciplina</th>
-              <th>Nota</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Simulado Python #4</td><td>Python</td><td>8.5</td><td>22/05</td></tr>
-            <tr><td>Prova de C# — POO</td><td>C#</td><td>9.2</td><td>20/05</td></tr>
-            <tr><td>Quiz SQL Básico</td><td>SQL</td><td>6.8</td><td>18/05</td></tr>
-            <tr><td>Simulado Machine Learning #2</td><td>Machine Learning</td><td>4.5</td><td>15/05</td></tr>
-          </tbody>
-        </table>
+        <div id="avaliacoesList" class="list-container" style="margin-top:1rem;">
+          <!-- preenchido por JS -->
+        </div>
+      </section>
+
+      <section class="card card-section">
+        <h3>Conquistas</h3>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div class="card-subtitle">Minhas medalhas</div>
+          <div id="conquestCount" class="card-subtitle">0 de 0</div>
+        </div>
+        <div id="conquestsList" class="pills-container" style="margin-top:1rem;"></div>
+      </section>
+
+      <section class="card card-section">
+        <h3>Desempenho</h3>
+        <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
+          <div style="flex:0 0 auto;">
+            <div id="pieChart" class="pie-chart"><div class="pie-chart-inner"><span class="card-subtitle">Precisão</span><span id="chartCenterData" style="font-size:1.4rem; font-weight:700;">0%</span></div></div>
+          </div>
+          <div style="flex:1 1 220px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 class="card-title">Matemática</h4>
+              <div id="percentageText" style="font-size:1.8rem; font-weight:700;">0%</div>
+            </div>
+            <button id="btnCertificado" class="btn-action" style="margin-top:1rem;">Ver Certificado</button>
+          </div>
+        </div>
       </section>
     </fieldset>
 
@@ -210,6 +240,7 @@ function showPanel(usuario, painel) {
   const campos = document.querySelectorAll('fieldset[id^="' + usuario + '-"]');
   campos.forEach((campo) => {
     campo.style.display = 'none';
+    campo.setAttribute('aria-hidden', 'true');
   });
 
   const alvo = document.getElementById(usuario + '-' + painel);
@@ -217,11 +248,14 @@ function showPanel(usuario, painel) {
 
   if (alvo) {
     alvo.style.display = 'block';
+    alvo.setAttribute('aria-hidden', 'false');
     if (fallback) {
       fallback.style.display = 'none';
+      fallback.setAttribute('aria-hidden', 'true');
     }
   } else if (fallback) {
     fallback.style.display = 'block';
+    fallback.setAttribute('aria-hidden', 'false');
     const texto = fallback.querySelector('p');
     if (texto) {
       texto.textContent = 'A seção "' + painel + '" ainda está em construção.';
@@ -246,11 +280,48 @@ function showPanel(usuario, painel) {
     };
 
     titulo.textContent = rotulos[painel] || 'Painel';
+    // Update sidebar active state
+    const sidebarButtons = document.querySelectorAll('nav[role="navigation"] button[data-nav]');
+    sidebarButtons.forEach(btn => {
+      if (btn.dataset.nav === painel) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-current', 'true');
+      } else {
+        btn.classList.remove('active');
+        btn.removeAttribute('aria-current');
+      }
+    });
   }
 }
 
+/* Close sidebar with ESC and keep menu button aria-expanded in sync */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const aside = document.getElementById('sidebar');
+    if (aside && aside.classList.contains('open')) {
+      aside.classList.remove('open');
+      const btn = document.querySelector('.menu-toggle');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+});
+
+/* Ensure menu toggle updates aria-expanded when clicking */
+document.querySelectorAll('.menu-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const aside = document.getElementById('sidebar');
+    if (!aside) return;
+    const isOpen = aside.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+});
+
 function toggleSidebar() {
-  document.body.classList.toggle('sidebar-collapsed');
+  const aside = document.querySelector('aside');
+  if (!aside) return;
+  const isOpen = aside.classList.toggle('open');
+  const btn = document.querySelector('.menu-toggle');
+  if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 }
 
 function logout() {
