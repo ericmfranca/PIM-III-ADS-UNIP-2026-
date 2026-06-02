@@ -12,7 +12,7 @@
   
   <aside>
     <header>
-      <img src="logo.png" alt="Logo Nem Colei" class="logo">
+      <img src="../logo.png" alt="Logo Nem Colei" class="logo">
       <span> Aluno</span>
     </header>
 
@@ -122,6 +122,11 @@
       </section>
     </fieldset>
 
+    <fieldset id="aluno-mensagem" style="display:none">
+      <legend>Em construção</legend>
+      <p>A seção selecionada ainda está em construção.</p>
+    </fieldset>
+
     <fieldset id="aluno-questoes" style="display:none">
       <legend>Simulado em Andamento</legend>
       <header>
@@ -180,6 +185,129 @@
 </main>
 
 
+<script>
+const questoes = [
+  {
+    enunciado: 'Em Python, qual palavra-chave é usada para definir uma função?',
+    opcoes: ['def', 'fun', 'function', 'void'],
+    resposta: 'def'
+  },
+  {
+    enunciado: 'Qual comando SQL filtra grupos após o GROUP BY?',
+    opcoes: ['WHERE', 'HAVING', 'SELECT', 'ORDER BY'],
+    resposta: 'HAVING'
+  },
+  {
+    enunciado: 'Qual estrutura representa uma sequência ordenada e mutável em Python?',
+    opcoes: ['tupla', 'conjunto', 'lista', 'dicionário'],
+    resposta: 'lista'
+  }
+];
+
+let indiceQuestao = 0;
+
+function showPanel(usuario, painel) {
+  const campos = document.querySelectorAll('fieldset[id^="' + usuario + '-"]');
+  campos.forEach((campo) => {
+    campo.style.display = 'none';
+  });
+
+  const alvo = document.getElementById(usuario + '-' + painel);
+  const fallback = document.getElementById('aluno-mensagem');
+
+  if (alvo) {
+    alvo.style.display = 'block';
+    if (fallback) {
+      fallback.style.display = 'none';
+    }
+  } else if (fallback) {
+    fallback.style.display = 'block';
+    const texto = fallback.querySelector('p');
+    if (texto) {
+      texto.textContent = 'A seção "' + painel + '" ainda está em construção.';
+    }
+  }
+
+  const titulo = document.querySelector('.topbar h2');
+  if (titulo) {
+    const rotulos = {
+      painel: 'Painel',
+      avaliacoes: 'Avaliações',
+      questoes: 'Questões',
+      revisao: 'Revisão',
+      desempenho: 'Desempenho',
+      conquistas: 'Conquistas',
+      certificados: 'Certificados',
+      ranking: 'Ranking',
+      plano: 'Plano de Estudo',
+      perfil: 'Perfil',
+      recomendacoes: 'Recomendações',
+      notificacoes: 'Notificações'
+    };
+
+    titulo.textContent = rotulos[painel] || 'Painel';
+  }
+}
+
+function toggleSidebar() {
+  document.body.classList.toggle('sidebar-collapsed');
+}
+
+function logout() {
+  location.href = 'index.testpratica.html';
+}
+
+function renderQuiz() {
+  const questaoAtual = questoes[indiceQuestao];
+  const card = document.getElementById('questionCard');
+
+  if (!questaoAtual || !card) {
+    return;
+  }
+
+  const opcoesHtml = questaoAtual.opcoes
+    .map((opcao) => `<label><input type="radio" name="resposta" value="${opcao}"> ${opcao}</label><br>`)
+    .join('');
+
+  card.innerHTML = `
+    <h3>${questaoAtual.enunciado}</h3>
+    <div>${opcoesHtml}</div>
+    <p>Questão ${indiceQuestao + 1} de ${questoes.length}</p>
+  `;
+
+  document.getElementById('btnPrev').disabled = indiceQuestao === 0;
+  document.getElementById('btnNext').textContent = indiceQuestao === questoes.length - 1 ? 'Finalizar' : 'Próxima';
+}
+
+function startQuiz() {
+  indiceQuestao = 0;
+  renderQuiz();
+  showPanel('aluno', 'questoes');
+}
+
+function quizPrev() {
+  if (indiceQuestao > 0) {
+    indiceQuestao -= 1;
+    renderQuiz();
+  }
+}
+
+function quizNext() {
+  if (indiceQuestao < questoes.length - 1) {
+    indiceQuestao += 1;
+    renderQuiz();
+    return;
+  }
+
+  alert('Simulado concluído!');
+  showPanel('aluno', 'revisao');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  showPanel('aluno', 'painel');
+  renderQuiz();
+});
+</script>
 
 </body>
 
