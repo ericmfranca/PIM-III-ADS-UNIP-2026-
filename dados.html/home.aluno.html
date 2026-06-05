@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,209 +11,248 @@
     <script src="../shared/rascunho.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#conteudo-dinamico">Pular para o conteúdo</a>
-    
-  <main id="dash-aluno" class="main-container">
-  
-  <aside id="sidebar" class="sidebar" aria-hidden="true">
-    <header>
-      <img src="../logo.png" alt="Logo Nem Colei" class="logo">
-      <span> Aluno</span>
-    </header>
+  <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
 
-    <nav role="navigation" aria-label="Menu principal">
-      <h3>Principal</h3>
-      <button data-nav="painel" onclick="showPanel('aluno','painel')">Painel</button>
-      <button data-nav="avaliacoes" onclick="showPanel('aluno','avaliacoes')">Avaliações</button>
-      <button data-nav="questoes" onclick="showPanel('aluno','questoes')">Questões</button>
-      <button data-nav="revisao" onclick="showPanel('aluno','revisao')">Revisão</button>
-
-      <h3>Progresso</h3>
-      <button data-nav="desempenho" onclick="showPanel('aluno','desempenho')">Desempenho</button>
-      <button data-nav="conquistas" onclick="showPanel('aluno','conquistas')">Conquistas</button>
-      <button data-nav="certificados" onclick="showPanel('aluno','certificados')">Certificados</button>
-      <button data-nav="ranking" onclick="showPanel('aluno','ranking')">Ranking</button>
-
-      <h3>Pessoal</h3>
-      <button data-nav="plano" onclick="showPanel('aluno','plano')">Plano de Estudo</button>
-      <button data-nav="perfil" onclick="showPanel('aluno','perfil')">Perfil</button>
-    </nav>
-
-    <footer>
-      <strong>Lucas Silva</strong>
-      <small>aluno@nemcolei.com</small>
-      <button onclick="logout()">Sair</button>
-    </footer>
-  </aside>
-
-  <section id="conteudo-dinamico" tabindex="-1">
-    
-    <header class="topbar app-header">
-      <button class="menu-toggle" onclick="toggleSidebar()" aria-controls="sidebar" aria-expanded="false">☰</button>
-      <h2>Painel</h2>
-      <button onclick="showPanel('aluno','recomendacoes')"> Recomendações</button>
-      <button onclick="showPanel('aluno','notificacoes')"> Notificações</button>
-    </header>
-
-    <fieldset id="aluno-painel" class="app-page active-page">
-      <legend> Olá, Bem-Vindo de volta!</legend>
-      <p>Continue sua jornada de aprendizado</p>
-
-      <section class="card card-section">
-        <div id="xpCard">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <div id="levelTitle" class="level-badge">⭐ Carregando...</div>
-            <div id="levelNumber" style="font-weight:700;">Nível 0</div>
-          </div>
-
-          <div class="xp-bar-container" style="background:var(--color-surface-light); height:0.6rem; border-radius:999px; overflow:hidden;">
-            <div id="xpBar" class="progress-bar-fill" style="width:0%; height:100%; background:var(--color-accent);"></div>
-          </div>
-
-          <div class="xp-values">
-            <span id="currentXpDisplay">0 XP</span>
-            <span id="targetXpDisplay">0 XP</span>
-          </div>
-
-          <p style="margin-top:0.75rem;"><strong id="streakLabel">7 Dias Seguidos</strong></p>
-        </div>
-      </section>
-
-      <section class="grid-resumo">
-        <article>
-          <h4>Questões Feitas</h4>
-          <p>342 (+24 esta semana)</p>
-        </article>
-        <article>
-          <h4>Taxa de Acerto</h4>
-          <p>68% (+3% vs. última semana)</p>
-        </article>
-        <article>
-          <h4>Conquistas</h4>
-          <p>3 de 8 disponíveis</p>
-        </article>
-        <article>
-          <h4>Certificados</h4>
-          <p>1 (Python)</p>
-        </article>
-      </section>
-
-      <section class="card foco card-section">
-        <h3> Recomendação Diária</h3>
-        <mark> Python — Fundamentos</mark>
-        <p>Você errou 3 questões neste tópico na última semana. Hora de revisar!</p>
-        <small>~15 min · 10 questões · +50 XP</small>
-        <br><br>
-        <button id="btnPraticar" class="btn-action" onclick="startQuiz()">Começar Prática</button>
-      </section>
-
-      <section class="card card-section">
-        <h3> Escolha sua Disciplina</h3>
-        <ul>
-          <li>Python (542 questões) - 48% concluído</li>
-          <li>SQL (380 questões) - 32% concluído</li>
-          <li>Machine Learning (290 questões) - 18% concluído</li>
-          <li>Engenharia de Software (210 questões) - 75% concluído</li>
-          <li>Libras (175 questões) - 60% concluído</li>
-          <li>C# (145 questões) - 22% concluído</li>
-        </ul>
-      </section>
-
-      <section class="card card-section">
-        <h3> Últimas Avaliações</h3>
-        <div id="avaliacoesList" class="list-container" style="margin-top:1rem;">
-          <!-- preenchido por JS -->
-        </div>
-      </section>
-
-      <section class="card card-section">
-        <h3>Conquistas</h3>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div class="card-subtitle">Minhas medalhas</div>
-          <div id="conquestCount" class="card-subtitle">0 de 0</div>
-        </div>
-        <div id="conquestsList" class="pills-container" style="margin-top:1rem;"></div>
-      </section>
-
-      <section class="card card-section">
-        <h3>Desempenho</h3>
-        <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
-          <div style="flex:0 0 auto;">
-            <div id="pieChart" class="pie-chart"><div class="pie-chart-inner"><span class="card-subtitle">Precisão</span><span id="chartCenterData" style="font-size:1.4rem; font-weight:700;">0%</span></div></div>
-          </div>
-          <div style="flex:1 1 220px;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <h4 class="card-title">Matemática</h4>
-              <div id="percentageText" style="font-size:1.8rem; font-weight:700;">0%</div>
-            </div>
-            <button id="btnCertificado" class="btn-action" style="margin-top:1rem;">Ver Certificado</button>
+  <div class="dashboard">
+    <aside id="sidebar" class="sidebar" aria-label="Navegação do aluno">
+      <header class="sidebar-header">
+        <div class="logo-block">
+          <img src="../logo.png" alt="Logo Nem Colei" class="logo">
+          <div>
+            <p class="logo-text">Nem Colei</p>
+            <p class="sidebar-subtitle">Painel do Aluno</p>
           </div>
         </div>
-      </section>
-    </fieldset>
-
-    <fieldset id="aluno-mensagem" style="display:none">
-      <legend>Em construção</legend>
-      <p>A seção selecionada ainda está em construção.</p>
-    </fieldset>
-
-    <fieldset id="aluno-questoes" style="display:none">
-      <legend>Simulado em Andamento</legend>
-      <header>
-        <span>Python — Fundamentos</span>
-        <p>Questão 1 de 5</p>
-        <time>15:00</time>
       </header>
 
-      <div id="questionCard">
+      <nav class="sidebar-nav" aria-label="Menu principal">
+        <div class="nav-group">
+          <h3>Principal</h3>
+          <button class="active" type="button" data-nav="painel" onclick="showPanel('aluno','painel')">Painel</button>
+          <button type="button" data-nav="avaliacoes" onclick="showPanel('aluno','avaliacoes')">Avaliações</button>
+          <button type="button" data-nav="questoes" onclick="showPanel('aluno','questoes')">Questões</button>
+          <button type="button" data-nav="revisao" onclick="showPanel('aluno','revisao')">Revisão</button>
         </div>
 
-      <footer>
-        <button id="btnPrev" onclick="quizPrev()" disabled>Anterior</button>
-        <button id="btnNext" onclick="quizNext()">Próxima</button>
+        <div class="nav-group">
+          <h3>Progresso</h3>
+          <button type="button" data-nav="desempenho" onclick="showPanel('aluno','desempenho')">Desempenho</button>
+          <button type="button" data-nav="conquistas" onclick="showPanel('aluno','conquistas')">Conquistas</button>
+          <button type="button" data-nav="certificados" onclick="showPanel('aluno','certificados')">Certificados</button>
+          <button type="button" data-nav="ranking" onclick="showPanel('aluno','ranking')">Ranking</button>
+        </div>
+
+        <div class="nav-group">
+          <h3>Pessoal</h3>
+          <button type="button" data-nav="plano" onclick="showPanel('aluno','plano')">Plano de Estudo</button>
+          <button type="button" data-nav="perfil" onclick="showPanel('aluno','perfil')">Perfil</button>
+        </div>
+      </nav>
+
+      <footer class="sidebar-footer">
+        <strong>Lucas Silva</strong>
+        <small>aluno@nemcolei.com</small>
+        <button class="btn-action btn-outline" type="button" onclick="logout()">Sair</button>
       </footer>
-    </fieldset>
+    </aside>
 
-    <fieldset id="aluno-revisao" style="display:none">
-      <legend>Questões que você errou</legend>
-      <table>
-        <thead>
-          <tr>
-            <th>Questão</th>
-            <th>Disciplina</th>
-            <th>Sua Resposta</th>
-            <th>Correta</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Qual é a raiz da equação x² - 5x + 6 = 0?</td>
-            <td>Engenharia de Software</td>
-            <td>x = 1 e x = 2</td>
-            <td><strong>x = 2 e x = 3</strong></td>
-          </tr>
-          <tr>
-            <td>Em SQL, qual cláusula filtra grupos?</td>
-            <td>SQL</td>
-            <td>WHERE</td>
-            <td><strong>HAVING</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </fieldset>
+    <main id="mainContent" class="main-container main-content">
+      <header class="top-bar app-header">
+        <button class="menu-toggle" type="button" onclick="toggleSidebar()" aria-controls="sidebar" aria-expanded="false">☰</button>
 
-    <fieldset id="aluno-certificados" style="display:none">
-      <legend>Seus Certificados</legend>
-      <article>
-        <h3>Certificado de Conclusão — C#</h3>
-        <p>Emitido em 15/05/2026 · Nota: 9.2 · Código: NC2026C8A1</p>
-        <button>Baixar PDF</button>
-      </article>
-    </fieldset>
+        <div class="page-heading">
+          <p class="page-overline">Painel do aluno</p>
+          <h1>Olá, Lucas! Continue sua jornada</h1>
+        </div>
 
-  </section>
-</main>
+        <div class="page-actions">
+          <button class="btn-action btn-outline" type="button" onclick="showPanel('aluno','recomendacoes')">Recomendações</button>
+          <button class="btn-action btn-outline" type="button" onclick="showPanel('aluno','notificacoes')">Notificações</button>
+        </div>
+      </header>
 
+      <section id="aluno-painel" class="app-page page-section active-page" aria-live="polite">
+        <article class="card-section">
+          <div class="card-header-flex">
+            <div>
+              <p class="eyebrow">Resumo rápido</p>
+              <h2>Continue sua jornada de aprendizado</h2>
+            </div>
+            <span class="status-tag active">Atualizado</span>
+          </div>
+
+          <p class="card-subtitle">Acompanhe seu progresso, XP e recomendações em um só lugar.</p>
+
+          <div id="xpCard" class="xp-card">
+            <div class="xp-heading-row">
+              <div id="levelTitle" class="level-badge">⭐ Carregando...</div>
+              <div id="levelNumber" class="level-number">Nível 0</div>
+            </div>
+
+            <div class="xp-bar-container">
+              <div id="xpBar" class="progress-bar-fill" style="width:0%"></div>
+            </div>
+
+            <div class="xp-values">
+              <span id="currentXpDisplay">0 XP</span>
+              <span id="targetXpDisplay">0 XP</span>
+            </div>
+
+            <p class="streak-text"><strong id="streakLabel">7 Dias Seguidos</strong></p>
+          </div>
+        </article>
+
+        <section class="grid-resumo" aria-label="Resumo de performance">
+          <article class="stat-card">
+            <h4>Questões Feitas</h4>
+            <p>342 (+24 esta semana)</p>
+          </article>
+          <article class="stat-card">
+            <h4>Taxa de Acerto</h4>
+            <p>68% (+3% vs. última semana)</p>
+          </article>
+          <article class="stat-card">
+            <h4>Conquistas</h4>
+            <p>3 de 8 disponíveis</p>
+          </article>
+          <article class="stat-card">
+            <h4>Certificados</h4>
+            <p>1 (Python)</p>
+          </article>
+        </section>
+
+        <article class="card-section foco">
+          <h3>Recomendação Diária</h3>
+          <mark>Python — Fundamentos</mark>
+          <p>Você errou 3 questões neste tópico na última semana. Hora de revisar!</p>
+          <p class="card-subtitle">~15 min · 10 questões · +50 XP</p>
+          <button id="btnPraticar" class="btn-action" type="button" onclick="startQuiz()">Começar Prática</button>
+        </article>
+
+        <article class="card-section">
+          <h3>Escolha sua disciplina</h3>
+          <ul class="topic-list">
+            <li>Python (542 questões) - 48% concluído</li>
+            <li>SQL (380 questões) - 32% concluído</li>
+            <li>Machine Learning (290 questões) - 18% concluído</li>
+            <li>Engenharia de Software (210 questões) - 75% concluído</li>
+            <li>Libras (175 questões) - 60% concluído</li>
+            <li>C# (145 questões) - 22% concluído</li>
+          </ul>
+        </article>
+
+        <article class="card-section">
+          <h3>Últimas Avaliações</h3>
+          <div id="avaliacoesList" class="list-container"></div>
+        </article>
+
+        <article class="card-section">
+          <div class="card-header-flex">
+            <div>
+              <h3>Conquistas</h3>
+              <p class="card-subtitle">Minhas medalhas</p>
+            </div>
+            <div id="conquestCount" class="card-subtitle">0 de 0</div>
+          </div>
+          <div id="conquestsList" class="pills-container"></div>
+        </article>
+
+        <article class="card-section">
+          <div class="card-header-flex">
+            <div>
+              <h3>Desempenho</h3>
+            </div>
+            <div id="percentageText" class="card-title">0%</div>
+          </div>
+          <div class="performance-grid">
+            <div class="performance-chart">
+              <div id="pieChart" class="pie-chart">
+                <div class="pie-chart-inner">
+                  <span class="card-subtitle">Precisão</span>
+                  <span id="chartCenterData" class="performance-value">0%</span>
+                </div>
+              </div>
+            </div>
+            <div class="performance-details">
+              <div class="performance-meta">
+                <h4 class="card-title">Matemática</h4>
+                <p class="card-subtitle">Desempenho por disciplina</p>
+              </div>
+              <button id="btnCertificado" class="btn-action" type="button">Ver Certificado</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="aluno-mensagem" class="app-page page-section" hidden>
+        <div class="card-section">
+          <h2>Em construção</h2>
+          <p>A seção selecionada ainda está em construção.</p>
+        </div>
+      </section>
+
+      <section id="aluno-questoes" class="app-page page-section" hidden>
+        <div class="card-section">
+          <h2>Simulado em andamento</h2>
+          <div class="quiz-header">
+            <span>Python — Fundamentos</span>
+            <p>Questão 1 de 5</p>
+            <time>15:00</time>
+          </div>
+
+          <div id="questionCard"></div>
+
+          <div class="quiz-actions">
+            <button id="btnPrev" class="btn-action btn-outline" type="button" onclick="quizPrev()" disabled>Anterior</button>
+            <button id="btnNext" class="btn-action" type="button" onclick="quizNext()">Próxima</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="aluno-revisao" class="app-page page-section" hidden>
+        <div class="card-section">
+          <h2>Questões que você errou</h2>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Questão</th>
+                  <th>Disciplina</th>
+                  <th>Sua Resposta</th>
+                  <th>Correta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Qual é a raiz da equação x² - 5x + 6 = 0?</td>
+                  <td>Engenharia de Software</td>
+                  <td>x = 1 e x = 2</td>
+                  <td><strong>x = 2 e x = 3</strong></td>
+                </tr>
+                <tr>
+                  <td>Em SQL, qual cláusula filtra grupos?</td>
+                  <td>SQL</td>
+                  <td>WHERE</td>
+                  <td><strong>HAVING</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="aluno-certificados" class="app-page page-section" hidden>
+        <div class="card-section">
+          <h2>Seus certificados</h2>
+          <article>
+            <h3>Certificado de Conclusão — C#</h3>
+            <p>Emitido em 15/05/2026 · Nota: 9.2 · Código: NC2026C8A1</p>
+            <button class="btn-action" type="button">Baixar PDF</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
 
 <script>
 const questoes = [
@@ -237,9 +276,9 @@ const questoes = [
 let indiceQuestao = 0;
 
 function showPanel(usuario, painel) {
-  const campos = document.querySelectorAll('fieldset[id^="' + usuario + '-"]');
+  const campos = document.querySelectorAll('.page-section[id^="' + usuario + '-"]');
   campos.forEach((campo) => {
-    campo.style.display = 'none';
+    campo.hidden = true;
     campo.setAttribute('aria-hidden', 'true');
   });
 
@@ -247,14 +286,14 @@ function showPanel(usuario, painel) {
   const fallback = document.getElementById('aluno-mensagem');
 
   if (alvo) {
-    alvo.style.display = 'block';
+    alvo.hidden = false;
     alvo.setAttribute('aria-hidden', 'false');
     if (fallback) {
-      fallback.style.display = 'none';
+      fallback.hidden = true;
       fallback.setAttribute('aria-hidden', 'true');
     }
   } else if (fallback) {
-    fallback.style.display = 'block';
+    fallback.hidden = false;
     fallback.setAttribute('aria-hidden', 'false');
     const texto = fallback.querySelector('p');
     if (texto) {
@@ -262,7 +301,7 @@ function showPanel(usuario, painel) {
     }
   }
 
-  const titulo = document.querySelector('.topbar h2');
+  const titulo = document.querySelector('.top-bar h1');
   if (titulo) {
     const rotulos = {
       painel: 'Painel',
@@ -280,8 +319,8 @@ function showPanel(usuario, painel) {
     };
 
     titulo.textContent = rotulos[painel] || 'Painel';
-    // Update sidebar active state
-    const sidebarButtons = document.querySelectorAll('nav[role="navigation"] button[data-nav]');
+    // Atualiza estado ativo no menu lateral
+    const sidebarButtons = document.querySelectorAll('.sidebar-nav button[data-nav]');
     sidebarButtons.forEach(btn => {
       if (btn.dataset.nav === painel) {
         btn.classList.add('active');
@@ -379,10 +418,5 @@ window.addEventListener('DOMContentLoaded', () => {
   renderQuiz();
 });
 </script>
-
 </body>
-
-<h3> Painel do Aluno </h3>
-
-
 </html>

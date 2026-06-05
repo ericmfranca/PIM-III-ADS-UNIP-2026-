@@ -1,43 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home - Administrador</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../shared/globals.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Administrador | NemColei</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/globals.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
-    <div class="dashboard">
-        <aside class="sidebar" id="sidebar" aria-hidden="true">
-            <div class="sidebar-header">⚙️ Painel Admin</div>
-            <nav class="sidebar-nav">
-                <h3>Dashboard</h3>
-                <button data-nav="painel" class="active">Painel</button>
-                <button data-nav="relatorios">Relatórios</button>
-            </nav>
-        </aside>
+  <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
 
-        <main class="main-content">
-            <header class="top-bar">
-                <button class="menu-toggle" aria-controls="sidebar" aria-expanded="false">☰</button>
-                <h1 id="mainContent">Painel do Administrador</h1>
-            </header>
+  <div class="dashboard">
+    <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+      <div class="sidebar-header">
+        <span class="brand">⚙️ NemColei</span>
+        <p class="sidebar-subtitle">Painel do Administrador</p>
+      </div>
 
-            <section>
-                <div class="card"><h2>Visão Geral</h2><p style="color:var(--color-text-secondary);">Conteúdo do painel administrativo</p></div>
-            </section>
-        </main>
+      <nav class="sidebar-nav" aria-label="Navegação do painel">
+        <button class="active" type="button" data-nav="painel">Painel</button>
+        <button type="button" data-nav="relatorios">Relatórios</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="sidebar-footer-title">Conectado como</p>
+        <p class="sidebar-footer-value">Administrador</p>
+      </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+      <header class="top-bar">
+        <button class="menu-toggle" aria-controls="sidebar" aria-expanded="false" type="button">☰</button>
+
+        <div class="page-heading">
+          <p class="page-overline">Painel administrativo</p>
+          <h1>Painel do Administrador</h1>
         </div>
-        <script>
-            document.querySelectorAll('.menu-toggle').forEach(btn => btn.addEventListener('click', () => {
-                const aside = document.getElementById('sidebar');
-                const isOpen = aside.classList.toggle('open');
-                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            }));
-            document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ const aside=document.getElementById('sidebar'); if(aside){ aside.classList.remove('open'); document.querySelectorAll('.menu-toggle').forEach(b=>b.setAttribute('aria-expanded','false')); } }});
-        </script>
+
+        <button class="btn-action btn-primary" type="button">Atualizar dados</button>
+      </header>
+
+      <section class="card card-summary" aria-labelledby="overview-title">
+        <div class="card-header-flex">
+          <div>
+            <p class="eyebrow">Visão Geral</p>
+            <h2 id="overview-title">Resumo do painel</h2>
+          </div>
+          <span class="card-badge">Operação estável</span>
+        </div>
+
+        <p class="card-subtext">Monitoramento rápido das métricas principais, trilhas em andamento e últimos avisos do sistema.</p>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <p class="stat-label">Módulos concluídos</p>
+            <p class="stat-number">4 / 5</p>
+          </article>
+
+          <article class="stat-card">
+            <p class="stat-label">Taxa de acertos</p>
+            <p class="stat-number">84.2%</p>
+          </article>
+
+          <article class="stat-card">
+            <p class="stat-label">Linhas resolvidas</p>
+            <p class="stat-number">1.240</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="tracks-title">
+        <div class="card-header-flex">
+          <div>
+            <p class="eyebrow">Trilhas ativas</p>
+            <h2 id="tracks-title">Foco no desenvolvimento</h2>
+          </div>
+          <button class="btn-action btn-outline" type="button">Ver todas</button>
+        </div>
+
+        <div class="track-list">
+          <article class="track-card">
+            <div class="track-meta-row">
+              <strong>Modelagem de Banco de Dados</strong>
+              <span class="status-tag active">Em progresso</span>
+            </div>
+            <p>Modelagem relacional, consultas SQL, INNER JOINs e otimização de queries.</p>
+            <div class="progress-bar" aria-label="Progresso 90% de Modelagem de Banco de Dados">
+              <span class="progress-fill progress-90"></span>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <div class="track-meta-row">
+              <strong>C# & Programação Orientada a Objetos</strong>
+              <span class="status-tag active">Em progresso</span>
+            </div>
+            <p>Classes, herança, polimorfismo, encapsulamento e arquiteturas MVC/DDD.</p>
+            <div class="progress-bar" aria-label="Progresso 65% de C# & Programação Orientada a Objetos">
+              <span class="progress-fill progress-65"></span>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <div class="track-meta-row">
+              <strong>Interface Web com Bootstrap & CSS</strong>
+              <span class="status-tag pending">Pendente</span>
+            </div>
+            <p>Sistemas de Grid flexíveis, componentes responsivos e heurísticas de Nielsen.</p>
+            <div class="progress-bar" aria-label="Progresso 0% de Interface Web com Bootstrap & CSS">
+              <span class="progress-fill progress-0"></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="logs-title">
+        <div class="card-header-flex">
+          <div>
+            <p class="eyebrow">Últimos registros</p>
+            <h2 id="logs-title">Atividade do sistema</h2>
+          </div>
+        </div>
+
+        <ul class="logs-list">
+          <li class="log-item success">Backup do banco SQL concluído às 04:00</li>
+          <li class="log-item success">14 novos exercícios vinculados à trilha de Bootstrap</li>
+          <li class="log-item warn">Carga do servidor atingiu 72% durante simulado geral</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleButton = document.querySelector('.menu-toggle');
+
+    toggleButton.addEventListener('click', () => {
+      const isOpen = sidebar.classList.toggle('open');
+      toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
