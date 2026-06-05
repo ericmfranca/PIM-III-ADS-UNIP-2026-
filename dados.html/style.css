@@ -54,6 +54,16 @@ body {
     margin-bottom: 2rem;
 }
 
+.logo {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+}
+
 .brand {
     display: inline-flex;
     align-items: center;
