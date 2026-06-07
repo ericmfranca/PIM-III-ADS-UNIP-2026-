@@ -10,47 +10,22 @@
   <title>Nem Colei</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/globals.css">
+  <link rel="stylesheet" href="../dados.css/globals.css">
   <link rel="stylesheet" href="../dados.css/index.login.css">
   <link rel="stylesheet" href="../dados.css/style.login.css">
-
-<script>
-function login() {
-  var username = document.getElementById("login").value;
-  var password = document.getElementById("senha").value;
-
-  if (username === "Administrador" && password === "123") {
-    alert("Login realizado com sucesso!");
-    location.href = "home.administrador.html"; // Manda lá pra página do administrador
-
-
-  } else if (username === "Aluno" && password === "1234") {
-    alert("Login realizado com sucesso!");
-    location.href = "home.aluno.html"; // Manda lá pra página do aluno
-
-  } else if (username === "Gerenciador de Conteudo" && password === "12345") {
-    alert("Login realizado com sucesso!");
-    location.href = "home.gerenciador.html"; // Manda lá pra página do gerenciador
-
-  } else {
-    alert("Nome de usuário ou senha incorretos.");
-  }
-}
-</script>
-
-
+  <script src="../dados.js/login.js" defer></script>
 </head>
 
 <body>
 
   <div class="login-card">
     <img src="../logo.png" alt="Logo Nem Colei" class="logo">
-    <input type="text" id="login" placeholder="Digite seu nome">
+    <input type="text" id="login" placeholder="Digite seu email ou nome">
     <br><br>
     <input type="password" id="senha" placeholder="Digite sua senha">
     <br><br>
     <button onclick="login()">Entrar</button>
-    <p>Faça parte do grupo</p> <a href="">Cadastra-se</a>
+    <p>Faça parte do grupo</p> <a href="register.html">Cadastra-se</a>
   </div>
 </body>
 </html>

@@ -43,6 +43,29 @@
         color: white;
     }
 
+    .form-message {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #e7ffce;
+      font-size: 0.95rem;
+      min-height: 38px;
+    }
+
+    .form-message.error {
+      background: rgba(247, 72, 72, 0.16);
+      border-color: rgba(247, 72, 72, 0.3);
+      color: #ffdddd;
+    }
+
+    .form-message.success {
+      background: rgba(84, 255, 139, 0.18);
+      border-color: rgba(84, 255, 139, 0.35);
+      color: #d8ffd8;
+    }
+
     a{
         color: yellowgreen;
         font-size: 1rem;

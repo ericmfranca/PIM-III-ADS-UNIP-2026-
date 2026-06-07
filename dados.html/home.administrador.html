@@ -6,8 +6,9 @@
   <title>Painel do Administrador | NemColei</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/globals.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../dados.css/globals.css">
+  <link rel="stylesheet" href="../dados.css/style.css">
+  <script src="../dados.js/administrador.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
@@ -134,21 +135,5 @@
     </main>
   </div>
 
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const toggleButton = document.querySelector('.menu-toggle');
-
-    toggleButton.addEventListener('click', () => {
-      const isOpen = sidebar.classList.toggle('open');
-      toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && sidebar.classList.contains('open')) {
-        sidebar.classList.remove('open');
-        toggleButton.setAttribute('aria-expanded', 'false');
-      }
-    });
-  </script>
 </body>
 </html>

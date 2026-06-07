@@ -6,9 +6,11 @@
     <title>Home - Aluno</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../shared/globals.css">
-    <link rel="stylesheet" href="../shared/style.aluno.css">
-    <script src="../shared/rascunho.js" defer></script>
+    <link rel="stylesheet" href="../dados.css/globals.css">
+    <link rel="stylesheet" href="../dados.css/style.aluno.css">
+    <link rel="stylesheet" href="../dados.css/style.css">
+    <script src="../dados.js/rascunho.js" defer></script>
+    <script src="../dados.js/aluno.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
@@ -250,169 +252,29 @@
     </main>
   </div>
 
-<script>
-const questoes = [
-  {
-    enunciado: 'Em Python, qual palavra-chave é usada para definir uma função?',
-    opcoes: ['def', 'fun', 'function', 'void'],
-    resposta: 'def'
-  },
-  {
-    enunciado: 'Qual comando SQL filtra grupos após o GROUP BY?',
-    opcoes: ['WHERE', 'HAVING', 'SELECT', 'ORDER BY'],
-    resposta: 'HAVING'
-  },
-  {
-    enunciado: 'Qual estrutura representa uma sequência ordenada e mutável em Python?',
-    opcoes: ['tupla', 'conjunto', 'lista', 'dicionário'],
-    resposta: 'lista'
-  }
-];
+  <div id="modal-certificate" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="certificate-title" hidden>
+    <div class="modal-box" role="document">
+      <div class="modal-header">
+        <div class="modal-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7"></path><path d="M7 4h14v8H7z"></path></svg>
+        </div>
+        <button type="button" class="modal-close" aria-label="Fechar certificado">×</button>
+      </div>
+      <h2 id="certificate-title">Certificado de Conclusão</h2>
+      <p class="modal-subtitle">Este certificado é concedido a</p>
+      <p class="certificate-recipient">Daniel Aulicino</p>
+      <div class="certificate-details card-section">
+        <div class="certificate-row"><span>Curso:</span><span class="certificate-course">C# Avançado</span></div>
+        <div class="certificate-row"><span>Nota Final:</span><span class="certificate-grade">9.2 / 10</span></div>
+        <div class="certificate-row"><span>Horas:</span><span class="certificate-hours">48h</span></div>
+        <div class="certificate-row"><span>Data:</span><span class="certificate-date">05/06/2026</span></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-action" id="btnDownloadCertificate" type="button">Baixar PDF</button>
+        <button class="btn-outline" id="btnCloseCertificate" type="button">Fechar</button>
+      </div>
+    </div>
+  </div>
 
-let indiceQuestao = 0;
-
-function showPanel(usuario, painel) {
-  const campos = document.querySelectorAll('.page-section[id^="' + usuario + '-"]');
-  campos.forEach((campo) => {
-    campo.hidden = true;
-    campo.setAttribute('aria-hidden', 'true');
-  });
-
-  const alvo = document.getElementById(usuario + '-' + painel);
-  const fallback = document.getElementById('aluno-mensagem');
-
-  if (alvo) {
-    alvo.hidden = false;
-    alvo.setAttribute('aria-hidden', 'false');
-    if (fallback) {
-      fallback.hidden = true;
-      fallback.setAttribute('aria-hidden', 'true');
-    }
-  } else if (fallback) {
-    fallback.hidden = false;
-    fallback.setAttribute('aria-hidden', 'false');
-    const texto = fallback.querySelector('p');
-    if (texto) {
-      texto.textContent = 'A seção "' + painel + '" ainda está em construção.';
-    }
-  }
-
-  const titulo = document.querySelector('.top-bar h1');
-  if (titulo) {
-    const rotulos = {
-      painel: 'Painel',
-      avaliacoes: 'Avaliações',
-      questoes: 'Questões',
-      revisao: 'Revisão',
-      desempenho: 'Desempenho',
-      conquistas: 'Conquistas',
-      certificados: 'Certificados',
-      ranking: 'Ranking',
-      plano: 'Plano de Estudo',
-      perfil: 'Perfil',
-      recomendacoes: 'Recomendações',
-      notificacoes: 'Notificações'
-    };
-
-    titulo.textContent = rotulos[painel] || 'Painel';
-    // Atualiza estado ativo no menu lateral
-    const sidebarButtons = document.querySelectorAll('.sidebar-nav button[data-nav]');
-    sidebarButtons.forEach(btn => {
-      if (btn.dataset.nav === painel) {
-        btn.classList.add('active');
-        btn.setAttribute('aria-current', 'true');
-      } else {
-        btn.classList.remove('active');
-        btn.removeAttribute('aria-current');
-      }
-    });
-  }
-}
-
-/* Close sidebar with ESC and keep menu button aria-expanded in sync */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    const aside = document.getElementById('sidebar');
-    if (aside && aside.classList.contains('open')) {
-      aside.classList.remove('open');
-      const btn = document.querySelector('.menu-toggle');
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-    }
-  }
-});
-
-/* Ensure menu toggle updates aria-expanded when clicking */
-document.querySelectorAll('.menu-toggle').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const aside = document.getElementById('sidebar');
-    if (!aside) return;
-    const isOpen = aside.classList.toggle('open');
-    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-});
-
-function toggleSidebar() {
-  const aside = document.querySelector('aside');
-  if (!aside) return;
-  const isOpen = aside.classList.toggle('open');
-  const btn = document.querySelector('.menu-toggle');
-  if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-}
-
-function logout() {
-  location.href = 'index.testpratica.html';
-}
-
-function renderQuiz() {
-  const questaoAtual = questoes[indiceQuestao];
-  const card = document.getElementById('questionCard');
-
-  if (!questaoAtual || !card) {
-    return;
-  }
-
-  const opcoesHtml = questaoAtual.opcoes
-    .map((opcao) => `<label><input type="radio" name="resposta" value="${opcao}"> ${opcao}</label><br>`)
-    .join('');
-
-  card.innerHTML = `
-    <h3>${questaoAtual.enunciado}</h3>
-    <div>${opcoesHtml}</div>
-    <p>Questão ${indiceQuestao + 1} de ${questoes.length}</p>
-  `;
-
-  document.getElementById('btnPrev').disabled = indiceQuestao === 0;
-  document.getElementById('btnNext').textContent = indiceQuestao === questoes.length - 1 ? 'Finalizar' : 'Próxima';
-}
-
-function startQuiz() {
-  indiceQuestao = 0;
-  renderQuiz();
-  showPanel('aluno', 'questoes');
-}
-
-function quizPrev() {
-  if (indiceQuestao > 0) {
-    indiceQuestao -= 1;
-    renderQuiz();
-  }
-}
-
-function quizNext() {
-  if (indiceQuestao < questoes.length - 1) {
-    indiceQuestao += 1;
-    renderQuiz();
-    return;
-  }
-
-  alert('Simulado concluído!');
-  showPanel('aluno', 'revisao');
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  showPanel('aluno', 'painel');
-  renderQuiz();
-});
-</script>
 </body>
 </html>
