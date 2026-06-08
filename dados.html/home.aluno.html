@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="../dados.css/globals.css">
     <link rel="stylesheet" href="../dados.css/style.aluno.css">
     <link rel="stylesheet" href="../dados.css/style.css">
-    <script src="../dados.js/rascunho.js" defer></script>
+    <script src="../dados.js/aluno-nav.js" defer></script>
     <script src="../dados.js/aluno.js" defer></script>
 </head>
 
 <body>
-  <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+  <a class="skip-link" href="#mainContent">Pular para o Conteúdo</a>
 
   <div class="dashboard">
     <aside id="sidebar" class="sidebar" aria-label="Navegação do aluno">
@@ -27,25 +27,24 @@
       <nav class="sidebar-nav" aria-label="Menu principal">
         <div class="nav-group">
           <h3>Principal</h3>
-          <button class="active" type="button" data-nav="painel" onclick="showPanel('aluno','painel')">Painel</button>
-          <button type="button" data-nav="avaliacoes" onclick="showPanel('aluno','avaliacoes')">Avaliações</button>
-          <button type="button" data-nav="questoes" onclick="showPanel('aluno','questoes')">Questões</button>
-          <button type="button" data-nav="revisao" onclick="showPanel('aluno','revisao')">Revisão</button>
+          <button class="active" type="button" data-nav="painel" onclick="navigatePanel('painel')">Painel</button>
+          <button type="button" data-nav="avaliacoes" onclick="navigatePanel('avaliacoes')">Avaliações</button>
+          <button type="button" data-nav="questoes" onclick="navigatePanel('questoes')">Questões</button>
+          <button type="button" data-nav="revisao" onclick="navigatePanel('revisao')">Revisão</button>
         </div>
-
 
         <div class="nav-group">
           <h3>Progresso</h3>
-          <button type="button" data-nav="desempenho" onclick="showPanel('aluno','desempenho')">Desempenho</button>
-          <button type="button" data-nav="conquistas" onclick="showPanel('aluno','conquistas')">Conquistas</button>
-          <button type="button" data-nav="certificados" onclick="showPanel('aluno','certificados')">Certificados</button>
-          <button type="button" data-nav="ranking" onclick="showPanel('aluno','ranking')">Ranking</button>
+          <button type="button" data-nav="desempenho" onclick="navigatePanel('desempenho')">Desempenho</button>
+          <button type="button" data-nav="conquistas" onclick="navigatePanel('conquistas')">Conquistas</button>
+          <button type="button" data-nav="certificados" onclick="navigatePanel('certificados')">Certificados</button>
+          <button type="button" data-nav="ranking" onclick="navigatePanel('ranking')">Ranking</button>
         </div>
 
         <div class="nav-group">
           <h3>Pessoal</h3>
-          <button type="button" data-nav="plano" onclick="showPanel('aluno','plano')">Plano de Estudo</button>
-          <button type="button" data-nav="perfil" onclick="showPanel('aluno','perfil')">Perfil</button>
+          <button type="button" data-nav="plano" onclick="navigatePanel('plano')">Plano de Estudo</button>
+          <button type="button" data-nav="perfil" onclick="navigatePanel('perfil')">Perfil</button>
         </div>
       </nav>
 
@@ -62,30 +61,31 @@
 
         <div class="page-heading">
           <p class="page-overline">Painel do aluno</p>
-          <h1>Olá, Lucas! Continue sua jornada</h1>
+          <h1>Olá! Continue sua jornada</h1>
         </div>
 
         <div class="page-actions">
-          <button class="btn-action btn-outline" type="button" onclick="showPanel('aluno','recomendacoes')">Recomendações</button>
-          <button class="btn-action btn-outline" type="button" onclick="showPanel('aluno','notificacoes')">Notificações</button>
+          <button class="btn-action btn-outline" type="button" onclick="navigatePanel('recomendacoes')">Recomendações</button>
+          <button class="btn-action btn-outline" type="button" onclick="navigatePanel('notificacoes')">Notificações</button>
         </div>
       </header>
 
+      <div id="page-content">
       <section id="aluno-painel" class="app-page page-section active-page" aria-live="polite">
         <article class="card-section">
           <div class="card-header-flex">
             <div>
-              <p class="eyebrow">Resumo rápido</p>
+              <p class="eyebrow">Resumo Rápido</p>
               <h2>Continue sua jornada de aprendizado</h2>
             </div>
             <span class="status-tag active">Atualizado</span>
           </div>
 
-          <p class="card-subtitle">Acompanhe seu progresso, XP e recomendações em um só lugar.</p>
+          <p class="card-subtitle">Acompanhe seu progresso, XP e Recomendações</p>
 
           <div id="xpCard" class="xp-card">
             <div class="xp-heading-row">
-              <div id="levelTitle" class="level-badge">⭐ Carregando...</div>
+              <div id="levelTitle" class="level-badge">Carregando...</div>
               <div id="levelNumber" class="level-number">Nível 0</div>
             </div>
 
@@ -109,7 +109,7 @@
           </article>
           <article class="stat-card">
             <h4>Taxa de Acerto</h4>
-            <p>68% (+3% vs. última semana)</p>
+            <p>68% (+3% vs. Última semana)</p>
           </article>
           <article class="stat-card">
             <h4>Conquistas</h4>
@@ -123,10 +123,10 @@
 
         <article class="card-section foco">
           <h3>Recomendação Diária</h3>
-          <mark>Python — Fundamentos</mark>
+          <mark>Python Fundamentos</mark>
           <p>Você errou 3 questões neste tópico na última semana. Hora de revisar!</p>
           <p class="card-subtitle">~15 min · 10 questões · +50 XP</p>
-          <button id="btnPraticar" class="btn-action" type="button" onclick="startQuiz()">Começar Prática</button>
+          <button id="btnPraticar" class="btn-action" type="button" onclick="navigatePanel('questoes')">Começar Prática</button>
         </article>
 
         <article class="card-section">
@@ -178,7 +178,7 @@
                 <h4 class="card-title">Matemática</h4>
                 <p class="card-subtitle">Desempenho por disciplina</p>
               </div>
-              <button id="btnCertificado" class="btn-action" type="button">Ver Certificado</button>
+              <button id="btnCertificado" class="btn-action" type="button" onclick="abrirCertificadoMateria()">Ver Certificado</button>
             </div>
           </div>
         </article>
@@ -186,8 +186,8 @@
 
       <section id="aluno-mensagem" class="app-page page-section" hidden>
         <div class="card-section">
-          <h2>Em construção</h2>
-          <p>A seção selecionada ainda está em construção.</p>
+          <h2>Em formulação</h2>
+          <p>A sessão selecionada ainda está em formulação.</p>
         </div>
       </section>
 
@@ -195,7 +195,7 @@
         <div class="card-section">
           <h2>Simulado em andamento</h2>
           <div class="quiz-header">
-            <span>Python — Fundamentos</span>
+            <span>Python e Fundamentos</span>
             <p>Questão 1 de 5</p>
             <time>15:00</time>
           </div>
@@ -224,8 +224,8 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Qual é a raiz da equação x² - 5x + 6 = 0?</td>
-                  <td>Engenharia de Software</td>
+                  <td>Qual a raiz de X² - 5x + 6 = 0?</td>
+                  <td>Matemática</td>
                   <td>x = 1 e x = 2</td>
                   <td><strong>x = 2 e x = 3</strong></td>
                 </tr>
@@ -245,12 +245,13 @@
         <div class="card-section">
           <h2>Seus certificados</h2>
           <article>
-            <h3>Certificado de Conclusão — C#</h3>
+            <h3>Certificado de Conclusão: C#</h3>
             <p>Emitido em 15/05/2026 · Nota: 9.2 · Código: NC2026C8A1</p>
             <button class="btn-action" type="button">Baixar PDF</button>
           </article>
         </div>
       </section>
+      </div>
     </main>
   </div>
 
@@ -263,8 +264,8 @@
         <button type="button" class="modal-close" aria-label="Fechar certificado">×</button>
       </div>
       <h2 id="certificate-title">Certificado de Conclusão</h2>
-      <p class="modal-subtitle">Este certificado é concedido a</p>
-      <p class="certificate-recipient">Daniel Aulicino</p>
+      <p class="modal-subtitle">Este certificado foi concedido a</p>
+      <p class="certificate-recipient">Lucas</p>
       <div class="certificate-details card-section">
         <div class="certificate-row"><span>Curso:</span><span class="certificate-course">C# Avançado</span></div>
         <div class="certificate-row"><span>Nota Final:</span><span class="certificate-grade">9.2 / 10</span></div>

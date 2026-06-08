@@ -23,11 +23,11 @@
 
             <nav class="sidebar-nav" aria-label="Menu principal">
                 <h3>Menu</h3>
-                <button class="active" type="button">Painel</button>
-                <button type="button">Conteúdo</button>
-                <button type="button">Categorias</button>
-                <button type="button">Usuários</button>
-                <button type="button">Relatórios</button>
+                <button class="active" type="button" data-nav="painel" onclick="navigateGerenciadorPanel('painel')">Painel</button>
+                <button type="button" data-nav="conteudo" onclick="navigateGerenciadorPanel('conteudo')">Conteúdo</button>
+                <button type="button" data-nav="categorias" onclick="navigateGerenciadorPanel('categorias')">Categorias</button>
+                <button type="button" data-nav="usuarios" onclick="navigateGerenciadorPanel('usuarios')">Usuários</button>
+                <button type="button" data-nav="relatorios" onclick="navigateGerenciadorPanel('relatorios')">Relatórios</button>
             </nav>
 
             <div class="sidebar-footer">
@@ -45,78 +45,271 @@
                     <h1>Painel de Conteúdo</h1>
                 </div>
 
-                <button class="btn-action btn-primary" type="button">Novo conteúdo</button>
+                <button class="btn-action btn-primary" type="button" onclick="navigateGerenciadorPanel('conteudo')">Novo conteúdo</button>
             </header>
 
-            <section class="card" aria-labelledby="overview-title">
-                <div class="card-header-flex">
-                    <div>
-                        <p class="eyebrow">Visão Geral</p>
-                        <h2 id="overview-title">Controle de publicações</h2>
+            <div id="page-content">
+            <section id="gerenciador-painel" class="app-page page-section active-page" aria-live="polite">
+                <section class="card" aria-labelledby="overview-title">
+                    <div class="card-header-flex">
+                        <div>
+                            <p class="eyebrow">Visão Geral</p>
+                            <h2 id="overview-title">Controle de publicações</h2>
+                        </div>
+                        <span class="status-tag active">Atualizado</span>
                     </div>
-                    <span class="status-tag active">Atualizado</span>
-                </div>
 
-                <p class="card-subtext">Acompanhe o pipeline de conteúdo, revisão e métricas de engajamento.</p>
+                    <p class="card-subtext">Acompanhe o pipeline de conteúdo, revisão e métricas de engajamento.</p>
 
-                <div class="stats-grid">
-                    <article class="stat-card">
-                        <p class="stat-label">Pendente</p>
-                        <p class="stat-number">14</p>
-                    </article>
-                    <article class="stat-card">
-                        <p class="stat-label">Publicados hoje</p>
-                        <p class="stat-number">6</p>
-                    </article>
-                    <article class="stat-card">
-                        <p class="stat-label">Taxa de aprovação</p>
-                        <p class="stat-number">92%</p>
-                    </article>
-                </div>
+                    <div class="stats-grid">
+                        <article class="stat-card">
+                            <p class="stat-label">Pendente</p>
+                            <p class="stat-number">14</p>
+                        </article>
+                        <article class="stat-card">
+                            <p class="stat-label">Publicados hoje</p>
+                            <p class="stat-number">6</p>
+                        </article>
+                        <article class="stat-card">
+                            <p class="stat-label">Taxa de aprovação</p>
+                            <p class="stat-number">92%</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="card" aria-labelledby="recent-title">
+                    <div class="card-header-flex">
+                        <div>
+                            <p class="eyebrow">Últimas atualizações</p>
+                            <h2 id="recent-title">Conteúdos recentes</h2>
+                        </div>
+                        <button class="btn-action btn-outline" type="button" onclick="navigateGerenciadorPanel('conteudo')">Ver tudo</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Status</th>
+                                    <th>Autor</th>
+                                    <th>Última edição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Guia de Modelagem de Banco</td>
+                                    <td>Revisão</td>
+                                    <td>Mariana</td>
+                                    <td>01/06/2026</td>
+                                </tr>
+                                <tr>
+                                    <td>Novas práticas em MVC</td>
+                                    <td>Publicado</td>
+                                    <td>Lucas</td>
+                                    <td>31/05/2026</td>
+                                </tr>
+                                <tr>
+                                    <td>Tutorial de Bootstrap Avançado</td>
+                                    <td>Pendente</td>
+                                    <td>Ana</td>
+                                    <td>30/05/2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             </section>
 
-            <section class="card" aria-labelledby="recent-title">
-                <div class="card-header-flex">
-                    <div>
-                        <p class="eyebrow">Últimas atualizações</p>
-                        <h2 id="recent-title">Conteúdos recentes</h2>
+            <section id="gerenciador-conteudo" class="app-page page-section" aria-live="polite">
+                <section class="card" aria-labelledby="bank-title">
+                    <div class="card-header-flex">
+                        <div>
+                            <p class="eyebrow">Banco de Questões</p>
+                            <h2 id="bank-title">Questões cadastradas</h2>
+                        </div>
+                        <button class="btn-action btn-primary" type="button" onclick="alert('Abrir formulário de nova questão')">Nova questão</button>
                     </div>
-                    <button class="btn-action btn-outline" type="button">Ver histórico</button>
-                </div>
 
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Status</th>
-                                <th>Autor</th>
-                                <th>Última edição</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Guia de Modelagem de Banco</td>
-                                <td>Revisão</td>
-                                <td>Mariana</td>
-                                <td>01/06/2026</td>
-                            </tr>
-                            <tr>
-                                <td>Novas práticas em MVC</td>
-                                <td>Publicado</td>
-                                <td>Lucas</td>
-                                <td>31/05/2026</td>
-                            </tr>
-                            <tr>
-                                <td>Tutorial de Bootstrap Avançado</td>
-                                <td>Pendente</td>
-                                <td>Ana</td>
-                                <td>30/05/2026</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <p class="card-subtext">Crie, revise e publique questões vinculadas às disciplinas e avaliações da plataforma.</p>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Questão</th>
+                                    <th>Disciplina</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Em Python, qual palavra-chave define uma função?</td>
+                                    <td>Python</td>
+                                    <td><span class="status-tag active">Publicada</span></td>
+                                    <td>
+                                        <button class="btn-action btn-outline" type="button" onclick="alert('Editar questão')">Editar</button>
+                                        <button class="btn-action btn-outline" type="button" onclick="alert('Remover questão')">Remover</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Qual cláusula SQL filtra grupos após o GROUP BY?</td>
+                                    <td>Banco de Dados</td>
+                                    <td><span class="status-tag pending">Em revisão</span></td>
+                                    <td>
+                                        <button class="btn-action btn-outline" type="button" onclick="alert('Revisar questão')">Revisar</button>
+                                        <button class="btn-action btn-outline" type="button" onclick="alert('Remover questão')">Remover</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Qual estrutura representa uma sequência ordenada e mutável em Python?</td>
+                                    <td>Python</td>
+                                    <td><span class="status-tag pending">Rascunho</span></td>
+                                    <td>
+                                        <button class="btn-action btn-outline" type="button" onclick="alert('Editar questão')">Editar</button>
+                                        <button class="btn-action btn-primary" type="button" onclick="alert('Enviar para revisão do administrador')">Enviar para revisão</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>O que é encapsulamento em Programação Orientada a Objetos?</td>
+                                    <td>Engenharia de Software</td>
+                                    <td><span class="status-tag active">Publicada</span></td>
+                                    <td>
+                                        <button class="btn-action btn-outline" type="button" onclick="alert('Editar questão')">Editar</button>
+                                        <button class="btn-action btn-outline" type="button" onclick="alert('Remover questão')">Remover</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             </section>
+
+            <section id="gerenciador-categorias" class="app-page page-section" aria-live="polite">
+                <section class="card" aria-labelledby="categories-title">
+                    <div class="card-header-flex">
+                        <div>
+                            <p class="eyebrow">Categorias</p>
+                            <h2 id="categories-title">Disciplinas da plataforma</h2>
+                        </div>
+                        <button class="btn-action btn-primary" type="button" onclick="alert('Abrir formulário de nova categoria')">Nova categoria</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Disciplina</th>
+                                    <th>Questões cadastradas</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Python</td>
+                                    <td>542</td>
+                                    <td><span class="status-tag active">Ativa</span></td>
+                                    <td><button class="btn-action btn-outline" type="button" onclick="alert('Editar categoria')">Editar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Banco de Dados</td>
+                                    <td>380</td>
+                                    <td><span class="status-tag active">Ativa</span></td>
+                                    <td><button class="btn-action btn-outline" type="button" onclick="alert('Editar categoria')">Editar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Machine Learning</td>
+                                    <td>290</td>
+                                    <td><span class="status-tag active">Ativa</span></td>
+                                    <td><button class="btn-action btn-outline" type="button" onclick="alert('Editar categoria')">Editar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Libras</td>
+                                    <td>175</td>
+                                    <td><span class="status-tag pending">Em montagem</span></td>
+                                    <td><button class="btn-action btn-outline" type="button" onclick="alert('Editar categoria')">Editar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section id="gerenciador-usuarios" class="app-page page-section" aria-live="polite">
+                <section class="card" aria-labelledby="users-title">
+                    <div class="card-header-flex">
+                        <div>
+                            <p class="eyebrow">Usuários</p>
+                            <h2 id="users-title">Alunos e equipe</h2>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Perfil</th>
+                                    <th>Status</th>
+                                    <th>Última atividade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Lucas Silva</td>
+                                    <td>Aluno</td>
+                                    <td><span class="status-tag active">Ativo</span></td>
+                                    <td>06/06/2026</td>
+                                </tr>
+                                <tr>
+                                    <td>Mariana Souza</td>
+                                    <td>Gerenciador de Conteúdo</td>
+                                    <td><span class="status-tag active">Ativo</span></td>
+                                    <td>07/06/2026</td>
+                                </tr>
+                                <tr>
+                                    <td>Ana Costa</td>
+                                    <td>Aluno</td>
+                                    <td><span class="status-tag pending">Inativo</span></td>
+                                    <td>22/05/2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section id="gerenciador-relatorios" class="app-page page-section" aria-live="polite">
+                <section class="card" aria-labelledby="manager-reports-title">
+                    <div class="card-header-flex">
+                        <div>
+                            <p class="eyebrow">Relatórios</p>
+                            <h2 id="manager-reports-title">Produção de conteúdo</h2>
+                        </div>
+                        <button class="btn-action btn-outline" type="button" onclick="location.href='home.administrador.html'">Ver painel do Administrador</button>
+                    </div>
+
+                    <p class="card-subtext">Resumo da produção de conteúdo enviada para revisão e aprovação da Administração.</p>
+
+                    <div class="stats-grid">
+                        <article class="stat-card">
+                            <p class="stat-label">Questões publicadas (mês)</p>
+                            <p class="stat-number">58</p>
+                        </article>
+                        <article class="stat-card">
+                            <p class="stat-label">Aguardando aprovação</p>
+                            <p class="stat-number">14</p>
+                        </article>
+                        <article class="stat-card">
+                            <p class="stat-label">Taxa de aprovação</p>
+                            <p class="stat-number">92%</p>
+                        </article>
+                    </div>
+                </section>
+            </section>
+            </div>
         </main>
     </div>
 </body>

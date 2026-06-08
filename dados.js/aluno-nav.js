@@ -48,15 +48,20 @@ function navigatePanel(panel) {
     notificacoes: renderNotificacoesPage
   };
 
-const mainContent = document.querySelector('.main-container') || document.querySelector('main');
-   if (mainContent && renderers[panel]) {
-     renderers[panel](mainContent);
-   }
+  const pageContent = document.getElementById('page-content');
+  if (pageContent && renderers[panel]) {
+    renderers[panel](pageContent);
+  }
 }
 
 function getGreetingName() {
-  const el = document.getElementById('greetingName');
-  return el ? el.textContent : 'Aluno';
+  if (typeof getCurrentUser === 'function') {
+    const currentUser = getCurrentUser();
+    if (currentUser && currentUser.name) {
+      return currentUser.name.split(' ')[0];
+    }
+  }
+  return 'Aluno';
 }
 
 function getTitleSubtitle(panel) {
@@ -79,7 +84,7 @@ function getTitleSubtitle(panel) {
 
 function renderPainelPage(container) {
   container.innerHTML = `
-    <section id="aluno-painel" class="app-page page-section active-page">
+    <section id="aluno-painel" class="app-page page-section active-page" aria-live="polite">
       <article class="card-section">
         <div class="card-header-flex">
           <div>
@@ -93,46 +98,107 @@ function renderPainelPage(container) {
 
         <div id="xpCard" class="xp-card">
           <div class="xp-heading-row">
-            <div id="levelTitle" class="level-badge">⭐ Estudioso</div>
-            <div id="levelNumber" class="level-number">Nível 3</div>
+            <div id="levelTitle" class="level-badge">Carregando...</div>
+            <div id="levelNumber" class="level-number">Nível 0</div>
           </div>
 
           <div class="xp-bar-container">
-            <div id="xpBar" class="progress-bar-fill" style="width:74%"></div>
+            <div id="xpBar" class="progress-bar-fill" style="width:0%"></div>
           </div>
 
           <div class="xp-values">
-            <span id="currentXpDisplay">1850 XP</span>
-            <span id="targetXpDisplay">2500 XP</span>
+            <span id="currentXpDisplay">0 XP</span>
+            <span id="targetXpDisplay">0 XP</span>
           </div>
 
-          <p class="streak-text"><strong>7 Dias Seguidos 🔥</strong></p>
+          <p class="streak-text"><strong id="streakLabel">0 Dias Seguidos</strong></p>
         </div>
       </article>
 
-      <section class="grid-resumo">
-        <article class="card-section">
-          <p class="eyebrow">Seu Desempenho</p>
-          <h3>Matemática</h3>
-          <p class="card-subtitle">100% completo • 82% de acertos</p>
-          <div class="progress-bar"><div class="progress-fill" style="width:82%; background:#c0ff00;"></div></div>
+      <section class="grid-resumo" aria-label="Resumo de performance">
+        <article class="stat-card">
+          <h4>Questões Feitas</h4>
+          <p>342 (+24 esta semana)</p>
         </article>
-
-        <article class="card-section">
-          <p class="eyebrow">Última Atividade</p>
-          <h3>Simulado PIM III</h3>
-          <p class="card-subtitle">Banco de Dados & Engenharia</p>
-          <p style="margin-top: 8px; color: #94a3b8; font-size: 0.9rem;">Disponível</p>
+        <article class="stat-card">
+          <h4>Taxa de Acerto</h4>
+          <p>68% (+3% vs. última semana)</p>
         </article>
-
-        <article class="card-section">
-          <p class="eyebrow">Conquistas</p>
-          <h3>4 de 8 Desbloqueadas</h3>
-          <p class="card-subtitle">🎯 🔥 💻 🏆</p>
+        <article class="stat-card">
+          <h4>Conquistas</h4>
+          <p>3 de 8 disponíveis</p>
+        </article>
+        <article class="stat-card">
+          <h4>Certificados</h4>
+          <p>1 (Python)</p>
         </article>
       </section>
+
+      <article class="card-section foco">
+        <h3>Recomendação Diária</h3>
+        <mark>Python — Fundamentos</mark>
+        <p>Você errou 3 questões neste tópico na última semana. Hora de revisar!</p>
+        <p class="card-subtitle">~15 min · 10 questões · +50 XP</p>
+        <button id="btnPraticar" class="btn-action" type="button" onclick="navigatePanel('questoes')">Começar Prática</button>
+      </article>
+
+      <article class="card-section">
+        <h3>Escolha sua disciplina</h3>
+        <ul class="topic-list">
+          <li>Python (542 questões) - 48% concluído</li>
+          <li>SQL (380 questões) - 32% concluído</li>
+          <li>Machine Learning (290 questões) - 18% concluído</li>
+          <li>Engenharia de Software (210 questões) - 75% concluído</li>
+          <li>Libras (175 questões) - 60% concluído</li>
+          <li>C# (145 questões) - 22% concluído</li>
+        </ul>
+      </article>
+
+      <article class="card-section">
+        <h3>Últimas Avaliações</h3>
+        <div id="avaliacoesList" class="list-container"></div>
+      </article>
+
+      <article class="card-section">
+        <div class="card-header-flex">
+          <div>
+            <h3>Conquistas</h3>
+            <p class="card-subtitle">Minhas medalhas</p>
+          </div>
+          <div id="conquestCount" class="card-subtitle">0 de 0</div>
+        </div>
+        <div id="conquestsList" class="pills-container"></div>
+      </article>
+
+      <article class="card-section">
+        <div class="card-header-flex">
+          <div>
+            <h3>Desempenho</h3>
+          </div>
+          <div id="percentageText" class="card-title">0%</div>
+        </div>
+        <div class="performance-grid">
+          <div class="performance-chart">
+            <div id="pieChart" class="pie-chart">
+              <div class="pie-chart-inner">
+                <span class="card-subtitle">Precisão</span>
+                <span id="chartCenterData" class="performance-value">0%</span>
+              </div>
+            </div>
+          </div>
+          <div class="performance-details">
+            <div class="performance-meta">
+              <h4 class="card-title">Matemática</h4>
+              <p class="card-subtitle">Desempenho por disciplina</p>
+            </div>
+            <button id="btnCertificado" class="btn-action" type="button" onclick="abrirCertificadoMateria()">Ver Certificado</button>
+          </div>
+        </div>
+      </article>
     </section>
   `;
+
+  if (typeof renderPainelData === 'function') renderPainelData();
 }
 
 function renderAvaliacoesPage(container) {
@@ -175,32 +241,15 @@ function renderAvaliacoesPage(container) {
 function renderQuestoesPage(container) {
   container.innerHTML = `
     <section class="app-page page-section">
-      <article class="card-section">
+      <article class="card-section" id="simuladoContainer">
         <p class="eyebrow">Banco de Questões</p>
-        <h2>Pratique com questões selecionadas</h2>
+        <h2>Simulado: Python — Fundamentos</h2>
+        <p class="card-subtitle">3 questões de múltipla escolha · ~10 minutos · +20 XP por acerto</p>
 
-        <div id="questionCard" style="margin-top: 24px; padding: 20px; background: rgba(18, 20, 28, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 12px;">
-          <h3 style="color: #e2e8f0; margin-bottom: 16px; font-size: 1.1rem;">Em Python, qual palavra-chave é usada para definir uma função?</h3>
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #cbd5e1;">
-              <input type="radio" name="resposta" value="def"> def
-            </label>
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #cbd5e1;">
-              <input type="radio" name="resposta" value="fun"> fun
-            </label>
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #cbd5e1;">
-              <input type="radio" name="resposta" value="function"> function
-            </label>
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #cbd5e1;">
-              <input type="radio" name="resposta" value="void"> void
-            </label>
-          </div>
-          <p style="margin-top: 16px; color: #94a3b8; font-size: 0.9rem;">Questão 1 de 3</p>
-        </div>
-
-        <div style="margin-top: 20px; display: flex; gap: 10px;">
-          <button id="btnPrev" class="btn-action btn-outline" type="button" onclick="quizPrev()" disabled>Anterior</button>
-          <button id="btnNext" class="btn-action" type="button" onclick="quizNext()" style="background: #c0ff00; color: #000; font-weight: 600;">Próxima</button>
+        <div style="margin-top: 24px; padding: 24px; background: rgba(18, 20, 28, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 12px; text-align: center;">
+          <h3 style="color: #e2e8f0; margin-bottom: 8px; font-size: 1.1rem;">Pronto para testar seus conhecimentos?</h3>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px;">As questões só aparecem depois que você inicia o simulado. Você pode revisar suas respostas ao final.</p>
+          <button id="btnIniciarSimulado" class="btn-action" type="button" onclick="iniciarSimulado()" style="background: #c0ff00; color: #000; font-weight: 600;">Iniciar Simulado</button>
         </div>
       </article>
     </section>
@@ -281,22 +330,22 @@ function renderConquistasPage(container) {
 
         <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
           <div style="padding: 20px; background: rgba(192, 255, 0, 0.08); border: 1px solid rgba(192, 255, 0, 0.2); border-radius: 12px; text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 8px;">🎯</div>
+            <div style="font-size: 2.5rem; margin-bottom: 8px;"></div>
             <p style="color: #c0ff00; font-weight: 600; font-size: 0.9rem;">Explorador de Matemática</p>
           </div>
 
           <div style="padding: 20px; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 8px;">💻</div>
+            <div style="font-size: 2.5rem; margin-bottom: 8px;"></div>
             <p style="color: #818cf8; font-weight: 600; font-size: 0.9rem;">Explorador de C#</p>
           </div>
 
           <div style="padding: 20px; background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 12px; text-align: center; opacity: 0.5;">
-            <div style="font-size: 2.5rem; margin-bottom: 8px;">💾</div>
-            <p style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">🔒 SQL</p>
+            <div style="font-size: 2.5rem; margin-bottom: 8px;"></div>
+            <p style="color: #94a3b8; font-weight: 600; font-size: 0.9rem;">Bloqueado - SQL</p>
           </div>
 
           <div style="padding: 20px; background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 12px; text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 8px;">🔥</div>
+            <div style="font-size: 2.5rem; margin-bottom: 8px;"></div>
             <p style="color: #f43f5e; font-weight: 600; font-size: 0.9rem;">Inabalável</p>
           </div>
         </div>
@@ -448,17 +497,17 @@ function renderRecomendacoesPage(container) {
 
         <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
           <div style="padding: 16px; background: rgba(192, 255, 0, 0.08); border: 1px solid rgba(192, 255, 0, 0.2); border-radius: 10px;">
-            <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 4px;">⭐ Reforce Álgebra Linear</h4>
+            <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 4px;">Reforce Álgebra Linear</h4>
             <p style="color: #94a3b8; font-size: 0.9rem;">Você tem tido dificuldade neste tópico. Recomendamos 5 horas de prática.</p>
           </div>
 
           <div style="padding: 16px; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 10px;">
-            <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 4px;">📚 Novo Conteúdo: Programação Orientada a Objetos</h4>
+            <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 4px;">Novo Conteúdo: Programação Orientada a Objetos</h4>
             <p style="color: #94a3b8; font-size: 0.9rem;">Baseado nos seus interesses e progresso atual.</p>
           </div>
 
           <div style="padding: 16px; background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 10px;">
-            <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 4px;">🎯 Simulado Personalizado</h4>
+            <h4 style="color: #e2e8f0; font-weight: 600; margin-bottom: 4px;">Simulado Personalizado</h4>
             <p style="color: #94a3b8; font-size: 0.9rem;">Teste seus conhecimentos com questões do seu nível.</p>
           </div>
         </div>
@@ -476,29 +525,21 @@ function renderNotificacoesPage(container) {
 
         <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
           <div style="padding: 12px 16px; background: rgba(192, 255, 0, 0.08); border-left: 3px solid #c0ff00; border-radius: 4px;">
-            <p style="color: #e2e8f0; font-weight: 500; margin-bottom: 2px;">🎉 Parabéns! Você atingiu o nível 3!</p>
+            <p style="color: #e2e8f0; font-weight: 500; margin-bottom: 2px;">Parabéns! Você atingiu o nível 3!</p>
             <p style="color: #94a3b8; font-size: 0.85rem;">Há 2 horas</p>
           </div>
 
           <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.08); border-left: 3px solid #818cf8; border-radius: 4px;">
-            <p style="color: #e2e8f0; font-weight: 500; margin-bottom: 2px;">📖 Novo conteúdo disponível em Biologia</p>
+            <p style="color: #e2e8f0; font-weight: 500; margin-bottom: 2px;">Novo conteúdo disponível em Biologia</p>
             <p style="color: #94a3b8; font-size: 0.85rem;">Há 5 horas</p>
           </div>
 
           <div style="padding: 12px 16px; background: rgba(244, 63, 94, 0.08); border-left: 3px solid #f43f5e; border-radius: 4px;">
-            <p style="color: #e2e8f0; font-weight: 500; margin-bottom: 2px;">⏰ Lembrete: Complete seu simulado de hoje!</p>
+            <p style="color: #e2e8f0; font-weight: 500; margin-bottom: 2px;">Lembrete: Complete seu simulado de hoje!</p>
             <p style="color: #94a3b8; font-size: 0.85rem;">Há 1 dia</p>
           </div>
         </div>
       </article>
     </section>
   `;
-}
-
-function getCurrentUser() {
-  try {
-    return JSON.parse(localStorage.getItem('nemcolei_current_user') || 'null');
-  } catch (error) {
-    return null;
-  }
 }

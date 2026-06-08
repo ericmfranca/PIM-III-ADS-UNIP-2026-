@@ -22,8 +22,8 @@
       </div>
 
       <nav class="sidebar-nav" aria-label="Navegação do painel">
-        <button class="active" type="button" data-nav="painel">Painel</button>
-        <button type="button" data-nav="relatorios">Relatórios</button>
+        <button class="active" type="button" data-nav="painel" onclick="navigateAdminPanel('painel')">Painel</button>
+        <button type="button" data-nav="relatorios" onclick="navigateAdminPanel('relatorios')">Relatórios</button>
       </nav>
 
       <div class="sidebar-footer">
@@ -44,94 +44,161 @@
         <button class="btn-action btn-primary" type="button">Atualizar dados</button>
       </header>
 
-      <section class="card card-summary" aria-labelledby="overview-title">
-        <div class="card-header-flex">
-          <div>
-            <p class="eyebrow">Visão Geral</p>
-            <h2 id="overview-title">Resumo do painel</h2>
+      <div id="page-content">
+      <section id="admin-painel" class="app-page page-section active-page" aria-live="polite">
+        <section class="card card-summary" aria-labelledby="overview-title">
+          <div class="card-header-flex">
+            <div>
+              <p class="eyebrow">Visão Geral</p>
+              <h2 id="overview-title">Resumo da plataforma</h2>
+            </div>
+            <span class="card-badge">Operação estável</span>
           </div>
-          <span class="card-badge">Operação estável</span>
-        </div>
 
-        <p class="card-subtext">Monitoramento rápido das métricas principais, trilhas em andamento e últimos avisos do sistema.</p>
+          <p class="card-subtext">Monitoramento rápido dos indicadores da plataforma, fila de revisão de conteúdo e últimos avisos do sistema.</p>
 
-        <div class="stats-grid">
-          <article class="stat-card">
-            <p class="stat-label">Módulos concluídos</p>
-            <p class="stat-number">4 / 5</p>
-          </article>
+          <div class="stats-grid">
+            <article class="stat-card">
+              <p class="stat-label">Alunos ativos</p>
+              <p class="stat-number">1.248</p>
+            </article>
 
-          <article class="stat-card">
-            <p class="stat-label">Taxa de acertos</p>
-            <p class="stat-number">84.2%</p>
-          </article>
+            <article class="stat-card">
+              <p class="stat-label">Gerenciadores de conteúdo</p>
+              <p class="stat-number">6</p>
+            </article>
 
-          <article class="stat-card">
-            <p class="stat-label">Linhas resolvidas</p>
-            <p class="stat-number">1.240</p>
-          </article>
-        </div>
+            <article class="stat-card">
+              <p class="stat-label">Avaliações publicadas</p>
+              <p class="stat-number">132</p>
+            </article>
+
+            <article class="stat-card">
+              <p class="stat-label">Certificados emitidos</p>
+              <p class="stat-number">87</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="review-title">
+          <div class="card-header-flex">
+            <div>
+              <p class="eyebrow">Fila de revisão</p>
+              <h2 id="review-title">Conteúdo aguardando aprovação</h2>
+            </div>
+            <button class="btn-action btn-outline" type="button" onclick="location.href='home.gerenciador.html'">Abrir Gerenciador de Conteúdo</button>
+          </div>
+
+          <div class="track-list">
+            <article class="track-card">
+              <div class="track-meta-row">
+                <strong>Simulado: Estruturas de Dados em C#</strong>
+                <span class="status-tag pending">Aguardando revisão</span>
+              </div>
+              <p>Enviado por Gerenciador de Conteúdo · 18 questões · Disciplina: Programação Orientada a Objetos</p>
+            </article>
+
+            <article class="track-card">
+              <div class="track-meta-row">
+                <strong>Banco de Questões: Consultas SQL Avançadas</strong>
+                <span class="status-tag pending">Aguardando revisão</span>
+              </div>
+              <p>Enviado por Gerenciador de Conteúdo · 24 questões · Disciplina: Banco de Dados</p>
+            </article>
+
+            <article class="track-card">
+              <div class="track-meta-row">
+                <strong>Trilha: Fundamentos de Libras</strong>
+                <span class="status-tag active">Aprovado</span>
+              </div>
+              <p>Publicado em 05/06/2026 · Disciplina: Libras</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="logs-title">
+          <div class="card-header-flex">
+            <div>
+              <p class="eyebrow">Últimos registros</p>
+              <h2 id="logs-title">Atividade do sistema</h2>
+            </div>
+          </div>
+
+          <ul class="logs-list">
+            <li class="log-item success">Backup do banco de dados concluído às 04:00</li>
+            <li class="log-item success">2 novos conteúdos enviados para revisão pelo Gerenciador de Conteúdo</li>
+            <li class="log-item warn">Carga do servidor atingiu 72% durante simulado geral</li>
+          </ul>
+        </section>
       </section>
 
-      <section class="card" aria-labelledby="tracks-title">
-        <div class="card-header-flex">
-          <div>
-            <p class="eyebrow">Trilhas ativas</p>
-            <h2 id="tracks-title">Foco no desenvolvimento</h2>
+      <section id="admin-relatorios" class="app-page page-section" aria-live="polite">
+        <section class="card card-summary" aria-labelledby="reports-title">
+          <div class="card-header-flex">
+            <div>
+              <p class="eyebrow">Relatórios</p>
+              <h2 id="reports-title">Indicadores da plataforma</h2>
+            </div>
+            <span class="card-badge">Atualizado em 07/06/2026</span>
           </div>
-          <button class="btn-action btn-outline" type="button">Ver todas</button>
-        </div>
 
-        <div class="track-list">
-          <article class="track-card">
-            <div class="track-meta-row">
-              <strong>Modelagem de Banco de Dados</strong>
-              <span class="status-tag active">Em progresso</span>
-            </div>
-            <p>Modelagem relacional, consultas SQL, INNER JOINs e otimização de queries.</p>
-            <div class="progress-bar" aria-label="Progresso 90% de Modelagem de Banco de Dados">
-              <span class="progress-fill progress-90"></span>
-            </div>
-          </article>
+          <p class="card-subtext">Relatórios consolidados de uso, desempenho dos alunos e produção de conteúdo pelos Gerenciadores.</p>
 
-          <article class="track-card">
-            <div class="track-meta-row">
-              <strong>C# & Programação Orientada a Objetos</strong>
-              <span class="status-tag active">Em progresso</span>
-            </div>
-            <p>Classes, herança, polimorfismo, encapsulamento e arquiteturas MVC/DDD.</p>
-            <div class="progress-bar" aria-label="Progresso 65% de C# & Programação Orientada a Objetos">
-              <span class="progress-fill progress-65"></span>
-            </div>
-          </article>
+          <div class="stats-grid">
+            <article class="stat-card">
+              <p class="stat-label">Simulados realizados (mês)</p>
+              <p class="stat-number">3.482</p>
+            </article>
 
-          <article class="track-card">
-            <div class="track-meta-row">
-              <strong>Interface Web com Bootstrap & CSS</strong>
-              <span class="status-tag pending">Pendente</span>
-            </div>
-            <p>Sistemas de Grid flexíveis, componentes responsivos e heurísticas de Nielsen.</p>
-            <div class="progress-bar" aria-label="Progresso 0% de Interface Web com Bootstrap & CSS">
-              <span class="progress-fill progress-0"></span>
-            </div>
-          </article>
-        </div>
-      </section>
+            <article class="stat-card">
+              <p class="stat-label">Taxa média de acerto</p>
+              <p class="stat-number">71.4%</p>
+            </article>
 
-      <section class="card" aria-labelledby="logs-title">
-        <div class="card-header-flex">
-          <div>
-            <p class="eyebrow">Últimos registros</p>
-            <h2 id="logs-title">Atividade do sistema</h2>
+            <article class="stat-card">
+              <p class="stat-label">Conteúdos publicados (mês)</p>
+              <p class="stat-number">19</p>
+            </article>
           </div>
-        </div>
+        </section>
 
-        <ul class="logs-list">
-          <li class="log-item success">Backup do banco SQL concluído às 04:00</li>
-          <li class="log-item success">14 novos exercícios vinculados à trilha de Bootstrap</li>
-          <li class="log-item warn">Carga do servidor atingiu 72% durante simulado geral</li>
-        </ul>
+        <section class="card" aria-labelledby="reports-list-title">
+          <div class="card-header-flex">
+            <div>
+              <p class="eyebrow">Relatórios disponíveis</p>
+              <h2 id="reports-list-title">Histórico de relatórios</h2>
+            </div>
+            <button class="btn-action btn-outline" type="button" onclick="location.href='home.gerenciador.html'">Gerenciar Conteúdo</button>
+          </div>
+
+          <div class="track-list">
+            <article class="track-card">
+              <div class="track-meta-row">
+                <strong>Relatório de Desempenho Geral — Maio/2026</strong>
+                <span class="status-tag active">Disponível</span>
+              </div>
+              <p>Consolidado de avaliações, acertos e XP distribuído aos alunos.</p>
+            </article>
+
+            <article class="track-card">
+              <div class="track-meta-row">
+                <strong>Relatório de Produção de Conteúdo — Maio/2026</strong>
+                <span class="status-tag active">Disponível</span>
+              </div>
+              <p>Quantidade de questões, simulados e trilhas publicadas por cada Gerenciador de Conteúdo.</p>
+            </article>
+
+            <article class="track-card">
+              <div class="track-meta-row">
+                <strong>Relatório de Uso da Plataforma — Junho/2026</strong>
+                <span class="status-tag pending">Em geração</span>
+              </div>
+              <p>Disponível após o fechamento do mês corrente.</p>
+            </article>
+          </div>
+        </section>
       </section>
+      </div>
     </main>
   </div>
 
