@@ -203,7 +203,7 @@ function renderPainelPage(container) {
 
 function renderAvaliacoesPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Suas Avaliações</p>
         <h2>Acompanhe seu desempenho</h2>
@@ -240,7 +240,7 @@ function renderAvaliacoesPage(container) {
 
 function renderQuestoesPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section" id="simuladoContainer">
         <p class="eyebrow">Banco de Questões</p>
         <h2>Simulado: Python — Fundamentos</h2>
@@ -258,7 +258,7 @@ function renderQuestoesPage(container) {
 
 function renderRevisaoPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Revisão de Conteúdo</p>
         <h2>Reforce o que você aprendeu</h2>
@@ -295,7 +295,7 @@ function renderRevisaoPage(container) {
 
 function renderDesempenhoPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Análise de Desempenho</p>
         <h2>Seu progresso ao longo do tempo</h2>
@@ -323,7 +323,7 @@ function renderDesempenhoPage(container) {
 
 function renderConquistasPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Suas Conquistas</p>
         <h2>4 de 8 medalhas desbloqueadas</h2>
@@ -356,7 +356,7 @@ function renderConquistasPage(container) {
 
 function renderCertificadosPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Seus Certificados</p>
         <h2>Certificações conquistadas</h2>
@@ -381,7 +381,7 @@ function renderCertificadosPage(container) {
 
 function renderRankingPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Ranking Global</p>
         <h2>Compita com outros alunos</h2>
@@ -418,7 +418,7 @@ function renderRankingPage(container) {
 
 function renderPlanoPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Seu Plano de Estudo</p>
         <h2>Organize sua jornada de aprendizado</h2>
@@ -462,7 +462,7 @@ function renderPlanoPage(container) {
 function renderPerfilPage(container) {
   const currentUser = getCurrentUser();
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Seu Perfil</p>
         <h2>Gerencie suas informações</h2>
@@ -490,7 +490,7 @@ function renderPerfilPage(container) {
 
 function renderRecomendacoesPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Recomendações Personalizadas</p>
         <h2>Baseado no seu progresso</h2>
@@ -518,7 +518,7 @@ function renderRecomendacoesPage(container) {
 
 function renderNotificacoesPage(container) {
   container.innerHTML = `
-    <section class="app-page page-section">
+    <section class="app-page page-section active-page">
       <article class="card-section">
         <p class="eyebrow">Suas Notificações</p>
         <h2>Fique atualizado</h2>
