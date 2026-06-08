@@ -211,7 +211,7 @@ function renderAvaliacoesPage(container) {
         <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
           <div class="pill-item" style="justify-content: space-between; background: rgba(192, 255, 0, 0.08); border: 1px solid rgba(192, 255, 0, 0.2); padding: 16px; border-radius: 10px;">
             <div>
-              <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; color: #e2e8f0;">Simulado PIM III</h4>
+              <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; color: #e2e8f0;">Simulados</h4>
               <p class="card-subtitle">Banco de Dados & Engenharia</p>
             </div>
             <span class="status-tag active" style="background: rgba(192, 255, 0, 0.2); color: #c0ff00;">Disponível</span>
